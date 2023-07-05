@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cn.leolezury.celebrations.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "celebrations.refmap.json",
+  "mixins": [
+    "VillagerMixin",
+    "accessor.BrainAccessor"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

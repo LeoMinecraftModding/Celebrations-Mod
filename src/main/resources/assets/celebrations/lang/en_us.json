@@ -1,0 +1,12 @@
+{
+  "block.celebrations.chinese_styled_red_lantern": "Chinese Styled Red Lantern",
+
+  "tooltip.celebrations.gift": "This lantern contains a gift",
+  "tooltip.celebrations.gift_owner": "Gift from: ",
+  "tooltip.celebrations.lantern_with_potion": "This lantern contains potions",
+  "tooltip.celebrations.when_applied": "When Applied:",
+
+  "message.celebrations.take_gift": "You took the gift out of this lantern",
+  "message.celebrations.put_gift": "You put a gift inside this lantern",
+  "message.celebrations.cannot_ignite_due_to_gift": "This lantern contains a gift that cannot be lit now"
+}
