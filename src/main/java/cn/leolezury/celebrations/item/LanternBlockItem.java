@@ -191,7 +191,7 @@ public class LanternBlockItem extends BlockItem {
                 }
             } else if (tag.getString("GiftOwnerType").equals("Mob")) {
                 if (!giftOwnerName.isEmpty()) {
-                    ownerName = Component.translatable(giftOwnerName);
+                    ownerName = Component.literal(giftOwnerName);
                 }
             }
         }

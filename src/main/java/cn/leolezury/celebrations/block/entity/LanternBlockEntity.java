@@ -1,5 +1,6 @@
 package cn.leolezury.celebrations.block.entity;
 
+import cn.leolezury.celebrations.config.CBConfig;
 import cn.leolezury.celebrations.init.BlockEntityInit;
 import cn.leolezury.celebrations.util.CBNbtUtils;
 import com.google.common.collect.Lists;
@@ -118,12 +119,11 @@ public class LanternBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, LanternBlockEntity entity) {
-        //TODO: config
-        int radius = 20;
-        boolean giveNonEnemyBeneficialEffect = true;
-        boolean giveNonEnemyHarmfulEffect = true;
-        boolean giveEnemyBeneficialEffect = true;
-        boolean giveEnemyHarmfulEffect = true;
+        double radius = CBConfig.LANTERN_EFFECT_RADIUS.get();
+        boolean giveNonEnemyBeneficialEffect = CBConfig.GIVE_NON_ENEMY_BENEFICIAL_EFFECT.get();
+        boolean giveNonEnemyHarmfulEffect = CBConfig.GIVE_NON_ENEMY_HARMFUL_EFFECT.get();
+        boolean giveEnemyBeneficialEffect = CBConfig.GIVE_ENEMY_BENEFICIAL_EFFECT.get();
+        boolean giveEnemyHarmfulEffect = CBConfig.GIVE_ENEMY_HARMFUL_EFFECT.get();
 
         if (state.hasProperty(BlockStateProperties.LIT) && state.getValue(BlockStateProperties.LIT)) {
             for (int i = 0; i < entity.effects.size(); i++) {

@@ -1,16 +1,12 @@
 package cn.leolezury.celebrations.ai;
 
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
-import cn.leolezury.celebrations.init.BlockInit;
-import cn.leolezury.celebrations.init.ItemInit;
 import cn.leolezury.celebrations.util.CelebrationUtils;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
@@ -21,20 +17,19 @@ import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nullable;
 
-public class PlaceLantern extends Behavior<Villager> {
+public class TakeGiftAndLitLantern extends Behavior<Villager> {
     private final float speedModifier;
     private BlockPos targetPos;
     private int ticksSinceReached = 0;
     private int coolDown;
 
-    public PlaceLantern(float speed) {
+    public TakeGiftAndLitLantern(float speed) {
         super(ImmutableMap.of(
                         MemoryModuleType.INTERACTION_TARGET, MemoryStatus.VALUE_ABSENT,
                         MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
@@ -47,13 +42,9 @@ public class PlaceLantern extends Behavior<Villager> {
         if (!CelebrationUtils.isCelebrating(level)) return false;
         if (coolDown-- > 0) return false;
         coolDown = Math.max(coolDown, 0);
-        if (villager.isBaby()) return false;
+        if (!villager.isBaby()) return false;
         if (!ForgeEventFactory.getMobGriefingEvent(level, villager) || level.random.nextInt(2) == 0) {
             coolDown = 1200;
-            return false;
-        }
-        if (!villager.getPersistentData().getString("LanternDim").isEmpty() && !(villager.getPersistentData().getIntArray("LanternPos").length == 0)) {
-            coolDown = 12000;
             return false;
         }
         return true;
@@ -66,10 +57,9 @@ public class PlaceLantern extends Behavior<Villager> {
 
         targetPos = getValidLanternPos(level, villager);
         if (targetPos != null) {
+            villager.setItemSlot(EquipmentSlot.MAINHAND, Items.FLINT_AND_STEEL.getDefaultInstance());
             villager.getBrain().eraseMemory(MemoryModuleType.INTERACTION_TARGET);
             villager.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(targetPos, this.speedModifier, 1));
-            //TODO: get villager lantern
-            villager.setItemSlot(EquipmentSlot.MAINHAND, ItemInit.CHINESE_STYLED_RED_LANTERN.get().getDefaultInstance());
         }
     }
 
@@ -82,7 +72,7 @@ public class PlaceLantern extends Behavior<Villager> {
 
     @Override
     protected boolean canStillUse(ServerLevel level, Villager villager, long gameTime) {
-        return targetPos != null && canPlaceLantern(level, targetPos);
+        return targetPos != null && isValidLanternAt(level, targetPos);
     }
 
     @Override
@@ -94,25 +84,20 @@ public class PlaceLantern extends Behavior<Villager> {
 
             if (targetPos.closerToCenterThan(villager.position(), 2)) {
                 this.ticksSinceReached++;
-                if (ticksSinceReached > 10) {
-                    //TODO: get villager lantern
-                    BlockState state = BlockInit.CHINESE_STYLED_RED_LANTERN.get().defaultBlockState();
-                    level.setBlockAndUpdate(targetPos, state);
-                    SoundType soundType = state.getSoundType();
-                    level.playSound(null, targetPos, soundType.getPlaceSound(), SoundSource.BLOCKS, soundType.getVolume(), soundType.getPitch());
 
+                if (ticksSinceReached > 40) {
                     if (level.getBlockEntity(targetPos) instanceof LanternBlockEntity lanternBlockEntity) {
-                        //TODO: loot table version
-                        ItemStack gift = Items.EMERALD.getDefaultInstance();
-
-                        lanternBlockEntity.setGift(gift);
-                        lanternBlockEntity.setGiftOwnerType("Mob");
-                        lanternBlockEntity.setGiftOwnerName(villager.getDisplayName().getString());
+                        villager.setItemSlot(EquipmentSlot.MAINHAND, lanternBlockEntity.getGift());
+                        lanternBlockEntity.setGift(ItemStack.EMPTY);
+                        lanternBlockEntity.setGiftOwnerType("");
+                        lanternBlockEntity.setGiftOwnerName("");
+                    }
+                    BlockState lanternState = level.getBlockState(targetPos);
+                    if (lanternState.hasProperty(BlockStateProperties.LIT) && !lanternState.getValue(BlockStateProperties.LIT)) {
+                        level.setBlockAndUpdate(targetPos, lanternState.setValue(BlockStateProperties.LIT, true));
+                        level.playSound(null, targetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 2.0f, 1.0f);
                     }
 
-                    CompoundTag tag = villager.getPersistentData();
-                    tag.putString("LanternDim", level.dimension().location().toString());
-                    tag.putIntArray("LanternPos", new int[]{targetPos.getX(), targetPos.getY(), targetPos.getZ()});
                     targetPos = null;
                 }
             }
@@ -121,20 +106,22 @@ public class PlaceLantern extends Behavior<Villager> {
 
     @Nullable
     private static BlockPos getValidLanternPos(ServerLevel level, LivingEntity villager) {
-        RandomSource random = villager.getRandom();
         BlockPos blockPos = villager.blockPosition();
 
-        for (int i = 0; i < 10; i++) {
-            BlockPos pos = blockPos.offset(random.nextInt(21) - 10, random.nextInt(7) - 3, random.nextInt(21) - 10);
-            if (canPlaceLantern(level, pos)) {
-                return pos;
+        for (int x = -4; x <= 4; x++) {
+            for (int y = -2; y <= 2; y++) {
+                for (int z = -4; z <= 4; z++) {
+                    if (level.getBlockEntity(blockPos.offset(x, y, z)) instanceof LanternBlockEntity lanternBlockEntity && lanternBlockEntity.getGift() != null && !lanternBlockEntity.getGift().isEmpty()) {
+                        return blockPos.offset(x, y, z);
+                    }
+                }
             }
         }
 
         return null;
     }
 
-    public static boolean canPlaceLantern(ServerLevel serverLevel, BlockPos pos) {
-        return serverLevel.getBlockState(pos).isAir() && serverLevel.getBlockState(pos.above()).isFaceSturdy(serverLevel, pos.above(), Direction.DOWN, SupportType.CENTER);
+    public static boolean isValidLanternAt(ServerLevel serverLevel, BlockPos pos) {
+        return serverLevel.getBlockEntity(pos) instanceof LanternBlockEntity lanternBlockEntity && lanternBlockEntity.getGift() != null && !lanternBlockEntity.getGift().isEmpty();
     }
 }

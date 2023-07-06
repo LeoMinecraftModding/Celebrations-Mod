@@ -10,15 +10,18 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.schedule.Activity;
-import net.minecraft.world.level.Level;
 
 import java.util.Map;
 import java.util.Set;
 
 public class VillagerCelebrationAI {
-    public static void initVillagerBrain(Brain<Villager> brain, Level level) {
-        if (level instanceof ServerLevel serverLevel && CelebrationUtils.isCelebrating(serverLevel)) {
-            addTaskToActivity(brain, Activity.IDLE, Pair.of(3, new PlaceLantern(0.8f)));
+    public static void initVillagerBrain(Brain<Villager> brain, Villager villager) {
+        if (villager != null && villager.level() instanceof ServerLevel serverLevel && CelebrationUtils.isCelebrating(serverLevel)) {
+            if (villager.isBaby()) {
+                addTaskToActivity(brain, Activity.PLAY, Pair.of(9, new TakeGiftAndLitLantern(1.0f)));
+            } else {
+                addTaskToActivity(brain, Activity.IDLE, Pair.of(3, new PlaceLantern(0.8f)));
+            }
         }
     }
 

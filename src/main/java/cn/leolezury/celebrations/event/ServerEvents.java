@@ -15,9 +15,9 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onLevelTick(TickEvent.LevelTickEvent event) {
         if (event.phase == TickEvent.Phase.START && event.level instanceof ServerLevel serverLevel) {
-            CelebrationSavedData celebrationSavedData = CelebrationUtils.celebrationSavedDataMap.get(serverLevel.dimension());
+            CelebrationSavedData celebrationSavedData = CelebrationUtils.getCelebrationData(serverLevel);
             if (celebrationSavedData == null) {
-                CelebrationUtils.celebrationSavedDataMap.put(serverLevel.dimension(), serverLevel.getDataStorage().computeIfAbsent(CelebrationSavedData::load, CelebrationSavedData::create, "celebrations"));
+                CelebrationUtils.putCelebrationData(serverLevel, serverLevel.getDataStorage().computeIfAbsent(CelebrationSavedData::load, CelebrationSavedData::create, "celebrations"));
             } else {
                 celebrationSavedData.tick();
             }
@@ -27,8 +27,11 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
         if (event.getEntity() instanceof Villager villager && !villager.level().isClientSide) {
+            if (villager.tickCount % 60 != 0) {
+                return;
+            }
             ServerLevel serverLevel = (ServerLevel) villager.level();
-            CelebrationSavedData celebrationSavedData = CelebrationUtils.celebrationSavedDataMap.get(serverLevel.dimension());
+            CelebrationSavedData celebrationSavedData = CelebrationUtils.getCelebrationData(serverLevel);
             if (celebrationSavedData != null) {
                 boolean refreshed = villager.getPersistentData().getBoolean("BrainRefreshedForCelebration");
                 boolean should = celebrationSavedData.isCelebrating();

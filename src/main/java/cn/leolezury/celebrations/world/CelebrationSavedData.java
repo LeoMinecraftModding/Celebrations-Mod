@@ -1,5 +1,6 @@
 package cn.leolezury.celebrations.world;
 
+import cn.leolezury.celebrations.config.CBConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.saveddata.SavedData;
 import org.jetbrains.annotations.NotNull;
@@ -38,8 +39,8 @@ public class CelebrationSavedData extends SavedData {
             celebrationTicks = 0;
         }
         //TODO: config!!!
-        int celebrationCoolDown = 20;
-        int celebrationTime = 12000;
+        int celebrationCoolDown = CBConfig.CELEBRATION_INTERVAL.get();
+        int celebrationTime = CBConfig.CELEBRATION_DURATION.get();
 
         if (ticksSinceLastCelebration > celebrationCoolDown) {
             celebrating = true;

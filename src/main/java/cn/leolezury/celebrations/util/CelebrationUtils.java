@@ -9,10 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CelebrationUtils {
-    public static Map<ResourceKey<Level>, CelebrationSavedData> celebrationSavedDataMap = new HashMap<>();
+    private static Map<ResourceKey<Level>, CelebrationSavedData> celebrationSavedDataMap = new HashMap<>();
 
     public static CelebrationSavedData getCelebrationData(ServerLevel serverLevel) {
         return celebrationSavedDataMap.get(serverLevel.dimension());
+    }
+
+    public static void putCelebrationData(ServerLevel serverLevel, CelebrationSavedData celebrationSavedData) {
+        celebrationSavedDataMap.put(serverLevel.dimension(), celebrationSavedData);
     }
 
     public static boolean isCelebrating(ServerLevel serverLevel) {

@@ -5,6 +5,7 @@ import cn.leolezury.celebrations.block.CBLanternBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,7 +20,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Celebrations.MOD_ID);
 
-    public static final RegistryObject<Block> CHINESE_STYLED_RED_LANTERN = BLOCKS.register("chinese_styled_red_lantern", () -> new CBLanternBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instabreak().lightLevel((state) -> state.hasProperty(BlockStateProperties.LIT) && state.getValue(BlockStateProperties.LIT) ? 15 : 0)){
+    public static final RegistryObject<Block> CHINESE_STYLED_RED_LANTERN = BLOCKS.register("chinese_styled_red_lantern", () -> new CBLanternBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.WOOL).instabreak().lightLevel((state) -> state.hasProperty(BlockStateProperties.LIT) && state.getValue(BlockStateProperties.LIT) ? 15 : 0)){
         @Override
         public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
             VoxelShape shape = Shapes.empty();
