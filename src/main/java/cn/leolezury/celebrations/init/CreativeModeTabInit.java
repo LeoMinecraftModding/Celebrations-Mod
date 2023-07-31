@@ -24,5 +24,10 @@ public class CreativeModeTabInit {
                 output.accept(ItemInit.JAPANESE_STYLED_RED_LANTERN.get());
                 output.accept(ItemInit.COUPLET.get());
                 output.accept(ItemInit.HORIZONTAL_SCROLL.get());
+                output.accept(ItemInit.FU_STICKER.get());
+                output.accept(ItemInit.INVERTED_FU_STICKER.get());
+                output.accept(ItemInit.GOLDEN_FU_STICKER.get());
+                output.accept(ItemInit.INVERTED_GOLDEN_FU_STICKER.get());
+                output.accept(ItemInit.FIREWORK_BUNDLE.get());
             }).build());
 }

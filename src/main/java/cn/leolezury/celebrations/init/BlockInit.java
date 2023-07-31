@@ -1,13 +1,12 @@
 package cn.leolezury.celebrations.init;
 
 import cn.leolezury.celebrations.Celebrations;
-import cn.leolezury.celebrations.block.CBLanternBlock;
-import cn.leolezury.celebrations.block.CoupletBlock;
-import cn.leolezury.celebrations.block.HorizontalScrollBlock;
+import cn.leolezury.celebrations.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -97,4 +96,9 @@ public class BlockInit {
 
     public static final RegistryObject<Block> COUPLET = BLOCKS.register("couplet", () -> new CoupletBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
     public static final RegistryObject<Block> HORIZONTAL_SCROLL = BLOCKS.register("horizontal_scroll", () -> new HorizontalScrollBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
+    public static final RegistryObject<Block> FU_STICKER = BLOCKS.register("fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
+    public static final RegistryObject<Block> INVERTED_FU_STICKER = BLOCKS.register("inverted_fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
+    public static final RegistryObject<Block> GOLDEN_FU_STICKER = BLOCKS.register("golden_fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
+    public static final RegistryObject<Block> INVERTED_GOLDEN_FU_STICKER = BLOCKS.register("inverted_golden_fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
+    public static final RegistryObject<Block> FIREWORK_BUNDLE = BLOCKS.register("firework_bundle", () -> new FireworkBundleBlock(BlockBehaviour.Properties.copy(Blocks.TNT).mapColor(MapColor.COLOR_BROWN)));
 }

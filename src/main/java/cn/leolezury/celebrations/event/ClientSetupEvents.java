@@ -2,6 +2,7 @@ package cn.leolezury.celebrations.event;
 
 import cn.leolezury.celebrations.Celebrations;
 import cn.leolezury.celebrations.client.renderer.CoupletRenderer;
+import cn.leolezury.celebrations.client.renderer.FuStickerRenderer;
 import cn.leolezury.celebrations.client.renderer.HorizontalScrollRenderer;
 import cn.leolezury.celebrations.init.BlockEntityInit;
 import cn.leolezury.celebrations.message.CoupletUpdateMessage;
@@ -21,6 +22,7 @@ public class ClientSetupEvents {
     public static void clientSetup(FMLClientSetupEvent event) {
         BlockEntityRenderers.register(BlockEntityInit.COUPLET.get(), CoupletRenderer::new);
         BlockEntityRenderers.register(BlockEntityInit.HORIZONTAL_SCROLL.get(), HorizontalScrollRenderer::new);
+        BlockEntityRenderers.register(BlockEntityInit.FU_STICKER.get(), FuStickerRenderer::new);
         Celebrations.NETWORK_WRAPPER.registerMessage(packetsRegistered++, CoupletUpdateMessage.class, CoupletUpdateMessage::write, CoupletUpdateMessage::read, CoupletUpdateMessage.Handler::handle);
     }
 
@@ -28,5 +30,6 @@ public class ClientSetupEvents {
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(CoupletRenderer.LAYER_LOCATION, CoupletRenderer::createCoupletLayer);
         event.registerLayerDefinition(HorizontalScrollRenderer.LAYER_LOCATION, HorizontalScrollRenderer::createScrollLayer);
+        event.registerLayerDefinition(FuStickerRenderer.LAYER_LOCATION, FuStickerRenderer::createStickerLayer);
     }
 }

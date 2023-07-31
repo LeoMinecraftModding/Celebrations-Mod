@@ -4,7 +4,6 @@ import cn.leolezury.celebrations.Celebrations;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
 import cn.leolezury.celebrations.command.CelebrationsCommand;
 import cn.leolezury.celebrations.init.ItemInit;
-import cn.leolezury.celebrations.item.LanternBlockItem;
 import cn.leolezury.celebrations.util.CBUtils;
 import cn.leolezury.celebrations.util.CelebrationUtils;
 import cn.leolezury.celebrations.world.CelebrationSavedData;

@@ -4,8 +4,8 @@ import cn.leolezury.celebrations.Celebrations;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
 import cn.leolezury.celebrations.init.BlockEntityInit;
 import cn.leolezury.celebrations.item.LanternBlockItem;
-import cn.leolezury.celebrations.util.CBUtils;
 import cn.leolezury.celebrations.util.CBTags;
+import cn.leolezury.celebrations.util.CBUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,6 +32,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -39,17 +41,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class CBLanternBlock extends BaseEntityBlock {
+public class CBLanternBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public CBLanternBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(WATERLOGGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT);
+        builder.add(LIT, WATERLOGGED);
         super.createBlockStateDefinition(builder);
     }
     
@@ -84,8 +87,15 @@ public class CBLanternBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, BlockEntityInit.LANTERN.get(), LanternBlockEntity::tick);
     }
+
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
     
     public BlockState updateShape(BlockState state, Direction dir, BlockState state1, LevelAccessor accessor, BlockPos p_249685_, BlockPos pos) {
+        if (state.getValue(WATERLOGGED)) {
+            accessor.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(accessor));
+        }
         return dir == Direction.UP && !this.canSurvive(state, accessor, p_249685_) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, dir, state1, accessor, p_249685_, pos);
     }
 

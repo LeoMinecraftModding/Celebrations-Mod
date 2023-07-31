@@ -1,8 +1,6 @@
 package cn.leolezury.celebrations.ai;
 
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
-import cn.leolezury.celebrations.init.BlockInit;
-import cn.leolezury.celebrations.init.ItemInit;
 import cn.leolezury.celebrations.util.CBUtils;
 import cn.leolezury.celebrations.util.CelebrationUtils;
 import com.google.common.collect.ImmutableMap;
@@ -26,8 +24,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.ForgeEventFactory;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class PlaceLantern extends Behavior<Villager> {
     private final float speedModifier;

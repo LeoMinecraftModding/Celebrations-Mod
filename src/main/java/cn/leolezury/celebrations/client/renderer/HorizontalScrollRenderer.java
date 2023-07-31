@@ -61,7 +61,7 @@ public class HorizontalScrollRenderer implements BlockEntityRenderer<HorizontalS
     }
 
     void translateHorizontalScroll(PoseStack stack, float f) {
-        stack.translate(0.5F, 0.5F, 0.5F);
+        stack.translate(0.5F, 1.5F, 0.5F);
         stack.mulPose(Axis.YP.rotationDegrees(f));
         stack.translate(0, 0, -0.49F);
     }
@@ -114,7 +114,9 @@ public class HorizontalScrollRenderer implements BlockEntityRenderer<HorizontalS
     }
 
     private void translateHorizontalScrollText(PoseStack stack) {
-        float f = 0.015625F;
+        float scale = 1.5f;
+        float f = 0.015625F * scale;
+        stack.translate(0, -22f / 16f, 0);
         stack.scale(f, -f, f);
     }
 

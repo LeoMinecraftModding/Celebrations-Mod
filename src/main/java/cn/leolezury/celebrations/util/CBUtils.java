@@ -1,6 +1,5 @@
 package cn.leolezury.celebrations.util;
 
-import cn.leolezury.celebrations.ai.VillagerCelebrationAI;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
 import cn.leolezury.celebrations.item.LanternBlockItem;
 import net.minecraft.nbt.CompoundTag;

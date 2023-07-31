@@ -8,6 +8,11 @@
   "block.celebrations.japanese_styled_red_lantern": "日式红灯笼",
   "block.celebrations.couplet": "对联",
   "block.celebrations.horizontal_scroll": "对联横批",
+  "block.celebrations.fu_sticker": "福字",
+  "block.celebrations.inverted_fu_sticker": "倒福字",
+  "block.celebrations.golden_fu_sticker": "金色福字",
+  "block.celebrations.inverted_golden_fu_sticker": "倒金色福字",
+  "block.celebrations.firework_bundle": "烟花桶",
 
   "tooltip.celebrations.edit_couplet": "编辑对联信息",
   "tooltip.celebrations.edit_horizontal_scroll": "编辑对联横批信息",

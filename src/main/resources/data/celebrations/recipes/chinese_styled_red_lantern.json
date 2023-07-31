@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:candle"
+    },
+    "X": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "item": "celebrations:chinese_styled_red_lantern"
+  }
+}

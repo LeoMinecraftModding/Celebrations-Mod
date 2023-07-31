@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:firework_rocket"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "###",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "item": "celebrations:firework_bundle",
+    "nbt": "{FireworkAmount:4}",
+    "type": "minecraft:item_nbt"
+  }
+}

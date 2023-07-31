@@ -117,7 +117,7 @@ public class CoupletRenderer implements BlockEntityRenderer<CoupletBlockEntity> 
     private void translateCoupletText(PoseStack stack) {
         float scale = 1.5f;
         float f = 0.015625F * scale;
-        stack.translate(0, -0.4, 0);
+        stack.translate(0, -3f / 16f, 0);
         stack.scale(f, -f, f);
     }
 

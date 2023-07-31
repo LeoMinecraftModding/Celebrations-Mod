@@ -18,9 +18,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-import javax.annotation.Nullable;
 import java.util.stream.IntStream;
 
 @OnlyIn(Dist.CLIENT)
@@ -105,7 +105,7 @@ public class CoupletEditScreen extends Screen {
     }
 
     private void renderCoupletText(GuiGraphics graphics) {
-        graphics.pose().translate(0.0F, -0.4F * 0.9765628F, 4.0F);
+        graphics.pose().translate(0.0F, 0.9765628F * 12, 4.0F);
         Vector3f vector3f = this.getCoupletTextScale();
         graphics.pose().scale(vector3f.x(), vector3f.y(), vector3f.z());
         int i = this.text.getColor().getTextColor();

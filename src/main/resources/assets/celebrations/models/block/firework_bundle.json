@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "celebrations:block/firework_bundle_down",
+    "east": "celebrations:block/firework_bundle_side",
+    "north": "celebrations:block/firework_bundle_side",
+    "particle": "celebrations:block/firework_bundle_side",
+    "south": "celebrations:block/firework_bundle_side",
+    "up": "celebrations:block/firework_bundle_top",
+    "west": "celebrations:block/firework_bundle_side"
+  }
+}
