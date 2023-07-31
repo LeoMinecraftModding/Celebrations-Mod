@@ -2,7 +2,7 @@ package cn.leolezury.celebrations.block.entity;
 
 import cn.leolezury.celebrations.config.CBConfig;
 import cn.leolezury.celebrations.init.BlockEntityInit;
-import cn.leolezury.celebrations.util.CBNbtUtils;
+import cn.leolezury.celebrations.util.CBUtils;
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -93,13 +93,13 @@ public class LanternBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        CBNbtUtils.readLanternInfo(this, tag);
+        CBUtils.readLanternInfo(this, tag);
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        CBNbtUtils.writeLanternInfo(this, tag);
+        CBUtils.writeLanternInfo(this, tag);
     }
 
     private static void tryGiveEffect(MobEffectInstance instance, LivingEntity entity) {

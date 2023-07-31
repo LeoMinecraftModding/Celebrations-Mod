@@ -8,6 +8,6 @@ import net.minecraft.world.item.Item;
 
 public class CBTags {
     public static class Items {
-        public static final TagKey<Item> LANTERN_IGNITERS = ItemTags.create(new ResourceLocation(Celebrations.MOD_ID, "lantern_igniters"));
+        public static final TagKey<Item> IGNITERS = ItemTags.create(new ResourceLocation(Celebrations.MOD_ID, "igniters"));
     }
 }

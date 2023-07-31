@@ -43,8 +43,12 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
         if (coolDown-- > 0) return false;
         coolDown = Math.max(coolDown, 0);
         if (!villager.isBaby()) return false;
-        if (!ForgeEventFactory.getMobGriefingEvent(level, villager) || level.random.nextInt(2) == 0) {
+        if (!ForgeEventFactory.getMobGriefingEvent(level, villager)) {
             coolDown = 1200;
+            return false;
+        }
+        if (villager.getPersistentData().getString("LanternDim").isEmpty() || villager.getPersistentData().getIntArray("LanternPos").length == 0) {
+            coolDown = 200;
             return false;
         }
         return true;
@@ -55,7 +59,15 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
         this.coolDown = 20 * (level.random.nextInt(11) + 5);
         this.ticksSinceReached = 0;
 
-        targetPos = getValidLanternPos(level, villager);
+        String lanternDim = villager.getPersistentData().getString("LanternDim");
+        int[] lanternPos = villager.getPersistentData().getIntArray("LanternPos");
+        targetPos = new BlockPos(lanternPos[0], lanternPos[1], lanternPos[2]);
+
+        if (!level.dimension().location().toString().equals(lanternDim) || !isValidLanternAt(level, targetPos)) {
+            coolDown = 200;
+            stop(level, villager, gameTime);
+        }
+
         if (targetPos != null) {
             villager.setItemSlot(EquipmentSlot.MAINHAND, Items.FLINT_AND_STEEL.getDefaultInstance());
             villager.getBrain().eraseMemory(MemoryModuleType.INTERACTION_TARGET);
@@ -82,7 +94,7 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
             villager.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(targetPos, this.speedModifier, 2));
             villager.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(targetPos));
 
-            if (targetPos.closerToCenterThan(villager.position(), 2)) {
+            if (targetPos.closerToCenterThan(villager.position(), 5)) {
                 this.ticksSinceReached++;
 
                 if (ticksSinceReached > 40) {
@@ -102,23 +114,6 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
                 }
             }
         }
-    }
-
-    @Nullable
-    private static BlockPos getValidLanternPos(ServerLevel level, LivingEntity villager) {
-        BlockPos blockPos = villager.blockPosition();
-
-        for (int x = -4; x <= 4; x++) {
-            for (int y = -2; y <= 2; y++) {
-                for (int z = -4; z <= 4; z++) {
-                    if (level.getBlockEntity(blockPos.offset(x, y, z)) instanceof LanternBlockEntity lanternBlockEntity && lanternBlockEntity.getGift() != null && !lanternBlockEntity.getGift().isEmpty()) {
-                        return blockPos.offset(x, y, z);
-                    }
-                }
-            }
-        }
-
-        return null;
     }
 
     public static boolean isValidLanternAt(ServerLevel serverLevel, BlockPos pos) {

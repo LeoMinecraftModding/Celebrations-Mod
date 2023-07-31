@@ -21,10 +21,10 @@ public class CBConfig {
         BUILDER.pop();
         BUILDER.push("lantern");
         LANTERN_EFFECT_RADIUS = BUILDER.comment("This parameter determines the range of action of the lantern's potion effect").define("effectRange", 10d);
-        GIVE_NON_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enable lanterns with potion effects to give beneficial effects to non-enemy mobs.").define("giveNonEnemyBeneficialEffect", true);
-        GIVE_NON_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enable lanterns with potion effects to give harmful effects to non-enemy mobs.").define("giveNonEnemyHarmfulEffect", false);
-        GIVE_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enable lanterns with potion effects to give beneficial effects to enemy mobs.").define("giveEnemyBeneficialEffect", false);
-        GIVE_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enable lanterns with potion effects to give harmful effects to enemy mobs.").define("giveEnemyHarmfulEffect", true);
+        GIVE_NON_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give beneficial effects to non-enemy mobs").define("giveNonEnemyBeneficialEffect", true);
+        GIVE_NON_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give harmful effects to non-enemy mobs").define("giveNonEnemyHarmfulEffect", false);
+        GIVE_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give beneficial effects to enemy mobs").define("giveEnemyBeneficialEffect", false);
+        GIVE_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give harmful effects to enemy mobs").define("giveEnemyHarmfulEffect", true);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }

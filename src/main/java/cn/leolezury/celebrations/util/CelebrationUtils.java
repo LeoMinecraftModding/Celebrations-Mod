@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CelebrationUtils {
-    private static Map<ResourceKey<Level>, CelebrationSavedData> celebrationSavedDataMap = new HashMap<>();
+    private static final Map<ResourceKey<Level>, CelebrationSavedData> celebrationSavedDataMap = new HashMap<>();
 
     public static CelebrationSavedData getCelebrationData(ServerLevel serverLevel) {
         return celebrationSavedDataMap.get(serverLevel.dimension());

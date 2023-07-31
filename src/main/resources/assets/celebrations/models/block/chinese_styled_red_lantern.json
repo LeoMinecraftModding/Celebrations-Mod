@@ -1,11 +1,11 @@
 {
 	"render_type": "cutout",
 	"textures": {
-		"0": "celebrations:block/chinese_styled_red_lantern_1",
-		"1": "celebrations:block/chinese_styled_red_lantern_2",
-		"2": "celebrations:block/chinese_styled_red_lantern_3",
-		"3": "celebrations:block/chinese_styled_red_lantern_4",
-		"particle": "celebrations:block/chinese_styled_red_lantern_1"
+		"0": "celebrations:block/chinese_styled_red_lantern_0",
+		"1": "celebrations:block/chinese_styled_red_lantern_1",
+		"2": "celebrations:block/chinese_styled_red_lantern_2",
+		"3": "celebrations:block/chinese_styled_red_lantern_3",
+		"particle": "celebrations:block/chinese_styled_red_lantern_0"
 	},
 	"elements": [
 		{

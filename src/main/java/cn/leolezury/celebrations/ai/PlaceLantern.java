@@ -3,6 +3,7 @@ package cn.leolezury.celebrations.ai;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
 import cn.leolezury.celebrations.init.BlockInit;
 import cn.leolezury.celebrations.init.ItemInit;
+import cn.leolezury.celebrations.util.CBUtils;
 import cn.leolezury.celebrations.util.CelebrationUtils;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
@@ -48,11 +49,11 @@ public class PlaceLantern extends Behavior<Villager> {
         if (coolDown-- > 0) return false;
         coolDown = Math.max(coolDown, 0);
         if (villager.isBaby()) return false;
-        if (!ForgeEventFactory.getMobGriefingEvent(level, villager) || level.random.nextInt(2) == 0) {
+        if (!ForgeEventFactory.getMobGriefingEvent(level, villager)) {
             coolDown = 1200;
             return false;
         }
-        if (!villager.getPersistentData().getString("LanternDim").isEmpty() && !(villager.getPersistentData().getIntArray("LanternPos").length == 0)) {
+        if (CBUtils.getVillagerLanternBlock(villager).defaultBlockState().isAir() || (!villager.getPersistentData().getString("LanternDim").isEmpty() && (villager.getPersistentData().getIntArray("LanternPos").length >= 3))) {
             coolDown = 12000;
             return false;
         }
@@ -68,8 +69,7 @@ public class PlaceLantern extends Behavior<Villager> {
         if (targetPos != null) {
             villager.getBrain().eraseMemory(MemoryModuleType.INTERACTION_TARGET);
             villager.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(targetPos, this.speedModifier, 1));
-            //TODO: get villager lantern
-            villager.setItemSlot(EquipmentSlot.MAINHAND, ItemInit.CHINESE_STYLED_RED_LANTERN.get().getDefaultInstance());
+            villager.setItemSlot(EquipmentSlot.MAINHAND, CBUtils.getVillagerLanternItem(villager));
         }
     }
 
@@ -92,17 +92,16 @@ public class PlaceLantern extends Behavior<Villager> {
             villager.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(targetPos, this.speedModifier, 2));
             villager.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(targetPos));
 
-            if (targetPos.closerToCenterThan(villager.position(), 2)) {
+            if (targetPos.closerToCenterThan(villager.position(), 5)) {
                 this.ticksSinceReached++;
                 if (ticksSinceReached > 10) {
-                    //TODO: get villager lantern
-                    BlockState state = BlockInit.CHINESE_STYLED_RED_LANTERN.get().defaultBlockState();
+                    BlockState state = CBUtils.getVillagerLanternBlock(villager).defaultBlockState();
                     level.setBlockAndUpdate(targetPos, state);
                     SoundType soundType = state.getSoundType();
                     level.playSound(null, targetPos, soundType.getPlaceSound(), SoundSource.BLOCKS, soundType.getVolume(), soundType.getPitch());
 
                     if (level.getBlockEntity(targetPos) instanceof LanternBlockEntity lanternBlockEntity) {
-                        //TODO: loot table version
+                        // TODO: loot table
                         ItemStack gift = Items.EMERALD.getDefaultInstance();
 
                         lanternBlockEntity.setGift(gift);
@@ -124,7 +123,7 @@ public class PlaceLantern extends Behavior<Villager> {
         RandomSource random = villager.getRandom();
         BlockPos blockPos = villager.blockPosition();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 64; i++) {
             BlockPos pos = blockPos.offset(random.nextInt(21) - 10, random.nextInt(7) - 3, random.nextInt(21) - 10);
             if (canPlaceLantern(level, pos)) {
                 return pos;

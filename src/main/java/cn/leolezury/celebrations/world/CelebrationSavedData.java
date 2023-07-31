@@ -9,6 +9,8 @@ public class CelebrationSavedData extends SavedData {
     private boolean celebrating = false;
     private int ticksSinceLastCelebration;
     private int celebrationTicks;
+    private int celebrationCoolDown = 12000 * 2 * 30;
+    private int celebrationTime = 12000 * 2 * 2;
 
     public static CelebrationSavedData create() {
         return new CelebrationSavedData();
@@ -19,6 +21,8 @@ public class CelebrationSavedData extends SavedData {
         data.celebrating = tag.getBoolean("Celebrating");
         data.ticksSinceLastCelebration = tag.getInt("TicksSinceLastCelebration");
         data.celebrationTicks = tag.getInt("CelebrationTicks");
+        data.celebrationCoolDown = CBConfig.CELEBRATION_INTERVAL.get();
+        data.celebrationTime = CBConfig.CELEBRATION_DURATION.get();
         return data;
     }
 
@@ -38,9 +42,6 @@ public class CelebrationSavedData extends SavedData {
             ticksSinceLastCelebration++;
             celebrationTicks = 0;
         }
-        //TODO: config!!!
-        int celebrationCoolDown = CBConfig.CELEBRATION_INTERVAL.get();
-        int celebrationTime = CBConfig.CELEBRATION_DURATION.get();
 
         if (ticksSinceLastCelebration > celebrationCoolDown) {
             celebrating = true;

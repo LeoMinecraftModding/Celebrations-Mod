@@ -1,12 +1,17 @@
 package cn.leolezury.celebrations.util;
 
+import cn.leolezury.celebrations.ai.VillagerCelebrationAI;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
+import cn.leolezury.celebrations.item.LanternBlockItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
-public class CBNbtUtils {
+public class CBUtils {
     public static void writeLanternInfo(LanternBlockEntity lanternBlockEntity, CompoundTag tag) {
         if (!lanternBlockEntity.getEffects().isEmpty()) {
             ListTag listTag = new ListTag();
@@ -22,7 +27,9 @@ public class CBNbtUtils {
             lanternBlockEntity.getGift().save(compoundTag);
             tag.put("GiftItem", compoundTag);
             tag.putString("GiftOwnerType", lanternBlockEntity.getGiftOwnerType());
-            tag.putUUID("GiftOwnerUUID", lanternBlockEntity.getGiftOwnerUUID());
+            if (lanternBlockEntity.getGiftOwnerUUID() != null) {
+                tag.putUUID("GiftOwnerUUID", lanternBlockEntity.getGiftOwnerUUID());
+            }
             tag.putString("GiftOwnerName", lanternBlockEntity.getGiftOwnerName());
         }
     }
@@ -48,5 +55,23 @@ public class CBNbtUtils {
             }
             lanternBlockEntity.setGiftOwnerName(tag.getString("GiftOwnerName"));
         }
+    }
+
+    public static ItemStack getVillagerLanternItem(Villager villager) {
+        if (villager.getPersistentData().get("CBLantern") instanceof CompoundTag tag) {
+            return ItemStack.of(tag);
+        } else return ItemStack.EMPTY;
+    }
+
+    public static Block getVillagerLanternBlock(Villager villager) {
+        if (getVillagerLanternItem(villager).getItem() instanceof LanternBlockItem blockItem) {
+            return blockItem.getBlock();
+        } else return Blocks.AIR;
+    }
+
+    public static void setVillagerLantern(Villager villager, ItemStack lantern) {
+        CompoundTag tag = new CompoundTag();
+        lantern.save(tag);
+        villager.getPersistentData().put("CBLantern", tag);
     }
 }

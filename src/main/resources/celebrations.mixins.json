@@ -9,6 +9,7 @@
     "accessor.BrainAccessor"
   ],
   "client": [
+    "LocalPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

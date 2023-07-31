@@ -3,7 +3,7 @@ package cn.leolezury.celebrations.item;
 import cn.leolezury.celebrations.Celebrations;
 import cn.leolezury.celebrations.block.CBLanternBlock;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
-import cn.leolezury.celebrations.util.CBNbtUtils;
+import cn.leolezury.celebrations.util.CBUtils;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
@@ -101,7 +101,7 @@ public class LanternBlockItem extends BlockItem {
             CompoundTag tag = context.getItemInHand().getOrCreateTag();
 
             if (entity instanceof LanternBlockEntity lanternBlockEntity) {
-                CBNbtUtils.readLanternInfo(lanternBlockEntity, tag);
+                CBUtils.readLanternInfo(lanternBlockEntity, tag);
                 boolean result = level.setBlock(pos, state, 11);
                 if (result) {
                     level.getChunkAt(pos).addAndRegisterBlockEntity(entity);

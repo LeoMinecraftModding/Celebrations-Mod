@@ -4,7 +4,7 @@ import cn.leolezury.celebrations.Celebrations;
 import cn.leolezury.celebrations.block.entity.LanternBlockEntity;
 import cn.leolezury.celebrations.init.BlockEntityInit;
 import cn.leolezury.celebrations.item.LanternBlockItem;
-import cn.leolezury.celebrations.util.CBNbtUtils;
+import cn.leolezury.celebrations.util.CBUtils;
 import cn.leolezury.celebrations.util.CBTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -67,7 +67,7 @@ public class CBLanternBlock extends BaseEntityBlock {
             ItemStack itemStack = drops.get(i);
             if (itemStack.getItem() instanceof LanternBlockItem && blockEntity instanceof LanternBlockEntity lanternBlockEntity) {
                 CompoundTag tag = itemStack.getOrCreateTag();
-                CBNbtUtils.writeLanternInfo(lanternBlockEntity, tag);
+                CBUtils.writeLanternInfo(lanternBlockEntity, tag);
             }
             drops.set(i, itemStack);
         }
@@ -97,7 +97,7 @@ public class CBLanternBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.is(CBTags.Items.LANTERN_IGNITERS) && !state.getValue(LIT)) {
+        if (stack.is(CBTags.Items.IGNITERS) && !state.getValue(LIT)) {
             if (level.getBlockEntity(pos) instanceof LanternBlockEntity lanternBlockEntity) {
                 if (lanternBlockEntity.getGift() != null && !lanternBlockEntity.getGift().isEmpty()) {
                     if (!level.isClientSide) {
@@ -106,7 +106,9 @@ public class CBLanternBlock extends BaseEntityBlock {
                     return InteractionResult.FAIL;
                 }
             }
-            level.setBlockAndUpdate(pos, state.setValue(LIT, true));
+            if (!level.isClientSide) {
+                level.setBlockAndUpdate(pos, state.setValue(LIT, true));
+            }
             if (!level.isClientSide && !player.getAbilities().instabuild) {
                 if (!stack.isDamageableItem()) {
                     stack.shrink(1);
