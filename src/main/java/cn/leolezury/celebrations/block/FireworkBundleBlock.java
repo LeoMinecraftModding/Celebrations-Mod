@@ -4,6 +4,8 @@ import cn.leolezury.celebrations.block.entity.FireworkBundleBlockEntity;
 import cn.leolezury.celebrations.init.BlockEntityInit;
 import cn.leolezury.celebrations.util.CBTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -80,7 +82,19 @@ public class FireworkBundleBlock extends BaseEntityBlock {
         if (stack.is(CBTags.Items.IGNITERS)) {
             level.setBlockAndUpdate(pos, state.setValue(LIT, true));
             if (!player.getAbilities().instabuild) {
-                stack.shrink(1);
+                if (!stack.isDamageableItem()) {
+                    stack.shrink(1);
+                    if (stack.is(Items.FIRE_CHARGE)) {
+                        level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 2.0F, 1.0F);
+                    }
+                } else {
+                    stack.hurtAndBreak(1, player, (p) -> {
+                        p.broadcastBreakEvent(hand);
+                    });
+                    if (stack.is(Items.FLINT_AND_STEEL)) {
+                        level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 2.0F, 1.0F);
+                    }
+                }
             }
             return InteractionResult.SUCCESS;
         }

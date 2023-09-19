@@ -15,6 +15,10 @@ public class FireworkBundleBlockItem extends BlockItem {
     @Nullable
     @Override
     protected BlockState getPlacementState(BlockPlaceContext context) {
-        return super.getPlacementState(context).setValue(FireworkBundleBlock.FIREWORK_AMOUNT, context.getItemInHand().getOrCreateTag().getInt("FireworkAmount"));
+        BlockState state = super.getPlacementState(context);
+        if (state != null && state.hasProperty(FireworkBundleBlock.FIREWORK_AMOUNT)) {
+            return super.getPlacementState(context).setValue(FireworkBundleBlock.FIREWORK_AMOUNT, context.getItemInHand().getOrCreateTag().getInt("FireworkAmount"));
+        }
+        return state;
     }
 }
