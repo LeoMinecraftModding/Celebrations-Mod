@@ -13,6 +13,9 @@
   "block.celebrations.golden_fu_sticker": "Golden Fu Sticker",
   "block.celebrations.inverted_golden_fu_sticker": "Inverted Golden Fu Sticker",
   "block.celebrations.firework_bundle": "Firework Bundle",
+  
+  "item.celebrations.red_paper": "Red Paper",
+  "item.celebrations.gold_powder": "Gold Powder",
 
   "tooltip.celebrations.edit_couplet": "Edit Couplet Text",
   "tooltip.celebrations.edit_horizontal_scroll": "Edit Horizontal Scroll Text",
