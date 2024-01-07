@@ -24,4 +24,6 @@ public class ItemInit {
     public static final RegistryObject<Item> GOLDEN_FU_STICKER = ITEMS.register("golden_fu_sticker", () -> new BlockItem(BlockInit.GOLDEN_FU_STICKER.get(), new Item.Properties()));
     public static final RegistryObject<Item> INVERTED_GOLDEN_FU_STICKER = ITEMS.register("inverted_golden_fu_sticker", () -> new BlockItem(BlockInit.INVERTED_GOLDEN_FU_STICKER.get(), new Item.Properties()));
     public static final RegistryObject<Item> FIREWORK_BUNDLE = ITEMS.register("firework_bundle", () -> new FireworkBundleBlockItem(BlockInit.FIREWORK_BUNDLE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_PAPER = ITEMS.register("red_paper", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOLD_POWDER = ITEMS.register("gold_powder", () -> new Item(new Item.Properties()));
 }
