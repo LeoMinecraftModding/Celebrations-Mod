@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:paper"
+    },
+	{
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:red_dye"
+    }
+  ],
+  "result": {
+	"count": 4,
+    "item": "celebrations:red_paper"
+  }
+}

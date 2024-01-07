@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "celebrations:japanese_styled_paper_lantern"
+    },
+	{
+      "item": "minecraft:red_dye"
+    }
+  ],
+  "result": {
+    "item": "celebrations:japanese_styled_red_lantern"
+  }
+}

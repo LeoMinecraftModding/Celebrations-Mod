@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "celebrations:inverted_golden_fu_sticker"
+    }
+  ],
+  "result": {
+    "item": "celebrations:golden_fu_sticker"
+  }
+}
