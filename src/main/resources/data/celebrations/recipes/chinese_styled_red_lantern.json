@@ -2,16 +2,25 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "minecraft:candle"
+      "item": "minecraft:torch"
     },
     "X": {
-      "item": "minecraft:red_wool"
+      "item": "celebrations:red_paper"
+    },
+	"G": {
+      "item": "minecraft:gold_nugget"
+    },
+	"S": {
+      "item": "minecraft:string"
+    },
+	"W": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "XXX",
+    " G ",
     "X#X",
-    "XXX"
+    "WSW"
   ],
   "result": {
     "item": "celebrations:chinese_styled_red_lantern"

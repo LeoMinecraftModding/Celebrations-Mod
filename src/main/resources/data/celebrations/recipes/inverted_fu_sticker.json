@@ -3,9 +3,6 @@
   "category": "equipment",
   "ingredients": [
     {
-      "item": "minecraft:black_dye"
-    },
-    {
       "item": "celebrations:fu_sticker"
     }
   ],

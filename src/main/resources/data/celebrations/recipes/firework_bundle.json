@@ -5,12 +5,12 @@
       "item": "minecraft:firework_rocket"
     },
     "X": {
-      "tag": "minecraft:planks"
+      "tag": "minecraft:wooden_slabs"
     }
   },
   "pattern": [
     "###",
-    "X#X",
+    "###",
     "XXX"
   ],
   "result": {

@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "minecraft:candle"
+      "item": "minecraft:torch"
     },
     "X": {
       "item": "minecraft:paper"
+    },
+	"W": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "XXX",
+    " W ",
     "X#X",
-    "XXX"
+    " W "
   ],
   "result": {
     "item": "celebrations:chinese_styled_paper_lantern"

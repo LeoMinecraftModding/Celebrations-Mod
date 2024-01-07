@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "minecraft:candle"
+      "item": "minecraft:torch"
     },
     "X": {
-      "item": "minecraft:bamboo_planks"
+      "item": "minecraft:bamboo"
+    },
+	"S": {
+      "tag": "minecraft:wooden_slabs"
     }
   },
   "pattern": [
-    "XXX",
+    "XSX",
     "X#X",
-    "XXX"
+    "XSX"
   ],
   "result": {
     "item": "celebrations:chinese_styled_bamboo_lantern"

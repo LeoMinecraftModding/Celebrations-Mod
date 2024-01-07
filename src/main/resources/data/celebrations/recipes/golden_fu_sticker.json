@@ -1,13 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "ingredients": [
-    {
-      "item": "minecraft:yellow_dye"
+  "key": {
+    "R": {
+      "item": "celebrations:red_paper"
     },
-    {
-      "item": "celebrations:fu_sticker"
+    "G": {
+      "item": "celebrations:gold_powder"
     }
+  },
+  "pattern": [
+    " R ",
+    "RGR",
+    " R "
   ],
   "result": {
     "item": "celebrations:golden_fu_sticker"

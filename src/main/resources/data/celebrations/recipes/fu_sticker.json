@@ -1,19 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "ingredients": [
-    {
-      "item": "minecraft:black_dye"
+  "key": {
+    "R": {
+      "item": "celebrations:red_paper"
     },
-    {
-      "item": "minecraft:red_dye"
-    },
-    {
+    "B": {
       "item": "minecraft:ink_sac"
-    },
-    {
-      "item": "minecraft:paper"
     }
+  },
+  "pattern": [
+    " R ",
+    "RBR",
+    " R "
   ],
   "result": {
     "item": "celebrations:fu_sticker"

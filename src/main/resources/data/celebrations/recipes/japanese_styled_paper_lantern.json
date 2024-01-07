@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "minecraft:candle"
+      "item": "minecraft:torch"
     },
     "X": {
       "item": "minecraft:paper"
+    },
+	"S": {
+      "tag": "minecraft:wooden_slabs"
     }
   },
   "pattern": [
-    "X X",
+    " S ",
     "X#X",
-    "X X"
+    " S "
   ],
   "result": {
     "item": "celebrations:japanese_styled_paper_lantern"
