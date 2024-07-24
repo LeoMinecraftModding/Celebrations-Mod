@@ -1,76 +1,288 @@
 {
-	"render_type": "cutout",
-	"textures": {
-		"0": "celebrations:block/japanese_styled_red_lantern_0",
-		"1": "celebrations:block/japanese_styled_red_lantern_1",
-		"2": "celebrations:block/japanese_styled_red_lantern_2",
-		"particle": "celebrations:block/japanese_styled_red_lantern_0"
-	},
-	"elements": [
-		{
-			"from": [5, 0, 5],
-			"to": [11, 2, 11],
-			"faces": {
-				"north": {"uv": [5, 14, 11, 16], "texture": "#0"},
-				"east": {"uv": [5, 14, 11, 16], "texture": "#0"},
-				"south": {"uv": [5, 14, 11, 16], "texture": "#0"},
-				"west": {"uv": [5, 14, 11, 16], "texture": "#0"},
-				"down": {"uv": [0, 0, 6, 6], "texture": "#2"}
-			}
-		},
-		{
-			"from": [5, 14, 5],
-			"to": [11, 16, 11],
-			"faces": {
-				"north": {"uv": [5, 0, 11, 2], "texture": "#0"},
-				"east": {"uv": [5, 0, 11, 2], "texture": "#0"},
-				"south": {"uv": [5, 0, 11, 2], "texture": "#0"},
-				"west": {"uv": [5, 0, 11, 2], "texture": "#0"},
-				"up": {"uv": [0, 0, 6, 6], "texture": "#1"}
-			}
-		},
-		{
-			"from": [3, 2, 3],
-			"to": [13, 14, 13],
-			"faces": {
-				"north": {"uv": [3, 2, 13, 14], "texture": "#0"},
-				"east": {"uv": [3, 2, 13, 14], "texture": "#0"},
-				"south": {"uv": [3, 2, 13, 14], "texture": "#0"},
-				"west": {"uv": [3, 2, 13, 14], "texture": "#0"},
-				"up": {"uv": [0, 6, 10, 16], "texture": "#1"},
-				"down": {"uv": [0, 6, 10, 16], "texture": "#2"}
-			}
-		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [75, 45, 0],
-			"translation": [0, 2.5, 0],
-			"scale": [0.375, 0.375, 0.375]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [75, 45, 0],
-			"translation": [0, 2.5, 0],
-			"scale": [0.375, 0.375, 0.375]
-		},
-		"firstperson_righthand": {
-			"rotation": [0, 45, 0],
-			"scale": [0.4, 0.4, 0.4]
-		},
-		"firstperson_lefthand": {
-			"rotation": [0, 225, 0],
-			"scale": [0.4, 0.4, 0.4]
-		},
-		"ground": {
-			"translation": [0, 3, 0],
-			"scale": [0.25, 0.25, 0.25]
-		},
-		"gui": {
-			"rotation": [30, 225, 0],
-			"scale": [0.625, 0.625, 0.625]
-		},
-		"fixed": {
-			"scale": [0.5, 0.5, 0.5]
-		}
-	}
+  "render_type": "cutout",
+  "textures": {
+    "0": "celebrations:block/japanese_styled_red_lantern_0",
+    "1": "celebrations:block/japanese_styled_red_lantern_1",
+    "2": "celebrations:block/japanese_styled_red_lantern_2",
+    "particle": "celebrations:block/japanese_styled_red_lantern_0"
+  },
+  "elements": [
+    {
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        2,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            14,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            5,
+            14,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            5,
+            14,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            5,
+            14,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "texture": "#2"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        14,
+        5
+      ],
+      "to": [
+        11,
+        16,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "texture": "#1"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        2,
+        3
+      ],
+      "to": [
+        13,
+        14,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            2,
+            13,
+            14
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            3,
+            2,
+            13,
+            14
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            3,
+            2,
+            13,
+            14
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            3,
+            2,
+            13,
+            14
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0,
+            6,
+            10,
+            16
+          ],
+          "texture": "#1"
+        },
+        "down": {
+          "uv": [
+            0,
+            6,
+            10,
+            16
+          ],
+          "texture": "#2"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        3,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
 }
