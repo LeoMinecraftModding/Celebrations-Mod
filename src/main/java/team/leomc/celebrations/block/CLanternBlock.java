@@ -1,7 +1,6 @@
 package team.leomc.celebrations.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentPatch;
@@ -34,10 +33,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.block.entity.LanternBlockEntity;
-import team.leomc.celebrations.item.LanternBlockItem;
+import team.leomc.celebrations.item.LanternItem;
 import team.leomc.celebrations.registry.CBlockEntities;
 import team.leomc.celebrations.registry.CDataComponents;
 import team.leomc.celebrations.util.CTags;
@@ -71,15 +71,22 @@ public class CLanternBlock extends BaseEntityBlock implements SimpleWaterloggedB
 	}
 
 	@Override
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+		ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
+		if (level.getBlockEntity(pos) instanceof LanternBlockEntity blockEntity) {
+			stack.applyComponentsAndValidate(DataComponentPatch.builder().set(CDataComponents.LANTERN.get(), blockEntity.getLantern()).build());
+		}
+		return stack;
+	}
+
+	@Override
 	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		List<ItemStack> drops = super.getDrops(state, builder);
 		BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-		for (int i = 0; i < drops.size(); i++) {
-			ItemStack itemStack = drops.get(i);
-			if (itemStack.getItem() instanceof LanternBlockItem && blockEntity instanceof LanternBlockEntity lanternBlockEntity) {
+		for (ItemStack itemStack : drops) {
+			if (itemStack.getItem() instanceof LanternItem && blockEntity instanceof LanternBlockEntity lanternBlockEntity) {
 				itemStack.applyComponentsAndValidate(DataComponentPatch.builder().set(CDataComponents.LANTERN.get(), lanternBlockEntity.getLantern()).build());
 			}
-			drops.set(i, itemStack);
 		}
 		return drops;
 	}
@@ -119,7 +126,7 @@ public class CLanternBlock extends BaseEntityBlock implements SimpleWaterloggedB
 			if (level.getBlockEntity(pos) instanceof LanternBlockEntity lanternBlockEntity) {
 				if (lanternBlockEntity.getGift() != null && !lanternBlockEntity.getGift().isEmpty()) {
 					if (!level.isClientSide) {
-						player.sendSystemMessage(Component.translatable("message." + Celebrations.ID + ".cannot_ignite_due_to_gift").withStyle(ChatFormatting.ITALIC));
+						player.sendSystemMessage(Component.translatable("message." + Celebrations.ID + ".cannot_ignite_due_to_gift"));
 					}
 					return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 				}

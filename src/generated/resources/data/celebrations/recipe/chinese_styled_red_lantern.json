@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "celebrations:red_paper"
+    }
+  },
+  "pattern": [
+    " G ",
+    "X#X",
+    "WSW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebrations:chinese_styled_red_lantern"
+  }
+}

@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import team.leomc.celebrations.Celebrations;
@@ -37,6 +38,11 @@ public class CoupletRenderer extends SignLikeRenderer<CoupletBlockEntity, Couple
 	protected void renderSignLikeModel(PoseStack stack, int i, int i1, Model model, VertexConsumer consumer) {
 		CoupletModel coupletModel = (CoupletModel) model;
 		coupletModel.root.render(stack, consumer, i, i1);
+	}
+
+	@Override
+	public AABB getRenderBoundingBox(CoupletBlockEntity blockEntity) {
+		return AABB.encapsulatingFullBlocks(blockEntity.getBlockPos(), blockEntity.getBlockPos().below());
 	}
 
 	public static CoupletModel createCoupletModel(EntityModelSet set) {

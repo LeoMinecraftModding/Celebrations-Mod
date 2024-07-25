@@ -21,7 +21,7 @@ import java.util.Objects;
 public record Lantern(List<MobEffectInstance> effects, ItemStack gift, Component giftSender) {
 	public static final Codec<Lantern> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		MobEffectInstance.CODEC.listOf().fieldOf("effects").forGetter(Lantern::effects),
-		ItemStack.CODEC.fieldOf("gift").forGetter(Lantern::gift),
+		ItemStack.OPTIONAL_CODEC.fieldOf("gift").forGetter(Lantern::gift),
 		ComponentSerialization.CODEC.fieldOf("gift_sender").forGetter(Lantern::giftSender)
 	).apply(instance, Lantern::new));
 
@@ -42,7 +42,7 @@ public record Lantern(List<MobEffectInstance> effects, ItemStack gift, Component
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Lantern lantern = (Lantern) o;
-		return Objects.equals(gift, lantern.gift) && Objects.equals(giftSender, lantern.giftSender) && Objects.equals(effects, lantern.effects);
+		return Objects.equals(gift.getItem(), lantern.gift.getItem()) && Objects.equals(gift.getCount(), lantern.gift.getCount()) && Objects.equals(gift.getComponents(), lantern.gift.getComponents()) && Objects.equals(giftSender, lantern.giftSender) && Objects.equals(effects, lantern.effects);
 	}
 
 	@Override

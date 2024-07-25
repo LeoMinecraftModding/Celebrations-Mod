@@ -77,7 +77,7 @@ public abstract class SignLikeRenderer<E extends SignLikeBlockEntity, T extends 
 		this.translateSignLikeText(stack);
 		int i = getDarkColor(text);
 		int j = 4 * textLineHeight / 2;
-		FormattedCharSequence[] aformattedcharsequence = text.getRenderMessages((component) -> {
+		FormattedCharSequence[] renderMessages = text.getRenderMessages((component) -> {
 			List<FormattedCharSequence> list = this.font.split(component, textLineWidth);
 			return list.isEmpty() ? FormattedCharSequence.EMPTY : list.getFirst();
 		});
@@ -95,12 +95,12 @@ public abstract class SignLikeRenderer<E extends SignLikeBlockEntity, T extends 
 		}
 
 		for (int i1 = 0; i1 < text.messages().size(); ++i1) {
-			FormattedCharSequence formattedcharsequence = aformattedcharsequence[i1];
-			float f = (float) (-this.font.width(formattedcharsequence) / 2);
+			FormattedCharSequence charSequence = renderMessages[i1];
+			float f = (float) (-this.font.width(charSequence) / 2);
 			if (flag) {
-				this.font.drawInBatch8xOutline(formattedcharsequence, f, (float) (i1 * textLineHeight - j), k, i, stack.last().pose(), bufferSource, l);
+				this.font.drawInBatch8xOutline(charSequence, f, (float) (i1 * textLineHeight - j), k, i, stack.last().pose(), bufferSource, l);
 			} else {
-				this.font.drawInBatch(formattedcharsequence, f, (float) (i1 * textLineHeight - j), k, false, stack.last().pose(), bufferSource, Font.DisplayMode.POLYGON_OFFSET, 0, l);
+				this.font.drawInBatch(charSequence, f, (float) (i1 * textLineHeight - j), k, false, stack.last().pose(), bufferSource, Font.DisplayMode.POLYGON_OFFSET, 0, l);
 			}
 		}
 
@@ -110,7 +110,7 @@ public abstract class SignLikeRenderer<E extends SignLikeBlockEntity, T extends 
 	protected void translateSignLikeText(PoseStack stack) {
 		float scale = 1.5f;
 		float f = 0.015625F * scale;
-		stack.translate(0, -3f / 16f, 0);
+		stack.translate(0, -3f / 16f, 0.001);
 		stack.scale(f, -f, f);
 	}
 

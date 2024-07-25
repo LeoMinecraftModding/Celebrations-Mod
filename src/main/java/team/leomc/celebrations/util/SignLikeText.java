@@ -38,14 +38,25 @@ public record SignLikeText(List<Component> messages, DyeColor color, boolean glo
 	}
 
 	public SignLikeText setMessage(int index, Component component) {
+		List<Component> newMessages = messagesWithSize(index + 1);
+		newMessages.set(index, component);
+		return new SignLikeText(newMessages, color(), glow());
+	}
+
+	public SignLikeText setMessages(Function<Component, Component> function) {
 		List<Component> newMessages = new ArrayList<>(messages());
-		if (newMessages.size() <= index) {
-			for (int i = 0; i < index - messages().size() + 1; i++) {
+		newMessages.replaceAll(function::apply);
+		return new SignLikeText(newMessages, color(), glow());
+	}
+
+	public List<Component> messagesWithSize(int size) {
+		List<Component> newMessages = new ArrayList<>(messages());
+		if (newMessages.size() < size) {
+			for (int i = 0; i < size - messages().size(); i++) {
 				newMessages.add(Component.empty());
 			}
 		}
-		newMessages.set(index, component);
-		return new SignLikeText(newMessages, color(), glow());
+		return newMessages;
 	}
 
 	@Override

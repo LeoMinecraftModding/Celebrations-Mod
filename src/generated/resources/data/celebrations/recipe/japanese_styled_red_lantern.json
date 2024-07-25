@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "X": {
+      "item": "celebrations:red_paper"
+    }
+  },
+  "pattern": [
+    " S ",
+    "X#X",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebrations:japanese_styled_red_lantern"
+  }
+}

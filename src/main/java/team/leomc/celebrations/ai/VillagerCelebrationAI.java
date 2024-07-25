@@ -8,12 +8,17 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.schedule.Activity;
+import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.util.CelebrationUtils;
 
 import java.util.Map;
 import java.util.Set;
 
 public class VillagerCelebrationAI {
+	public static final String TAG_LANTERN_DIMENSION = Celebrations.id("lantern_dimension").toString();
+	public static final String TAG_LANTERN_POS = Celebrations.id("lantern_pos").toString();
+	public static final String TAG_BRAIN_REFRESHED_FOR_CELEBRATION = Celebrations.id("brain_refreshed_for_celebration").toString();
+
 	public static void initVillagerBrain(Brain<Villager> brain, Villager villager) {
 		if (villager != null && villager.level() instanceof ServerLevel serverLevel) {
 			if (CelebrationUtils.isCelebrating(serverLevel)) {

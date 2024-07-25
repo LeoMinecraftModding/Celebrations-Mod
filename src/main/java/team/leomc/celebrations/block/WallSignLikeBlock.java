@@ -7,11 +7,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -75,8 +75,8 @@ public abstract class WallSignLikeBlock extends BaseEntityBlock implements Simpl
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader levelReader, BlockPos pos) {
-		return levelReader.getBlockState(pos.relative(state.getValue(FACING).getOpposite())).isSolid() && levelReader.getBlockState(pos.below()).isAir();
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())).isSolid();
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public abstract class WallSignLikeBlock extends BaseEntityBlock implements Simpl
 	}
 
 	private boolean tryApplyDye(Level level, SignLikeBlockEntity entity, DyeItem item) {
-		if (entity.updateCoupletText((text) -> new SignLikeText(text.messages(), item.getDyeColor(), text.glow()))) {
+		if (entity.updateSignLikeText((text) -> new SignLikeText(text.messages(), item.getDyeColor(), text.glow()))) {
 			level.playSound(null, entity.getBlockPos(), SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
 			return true;
 		} else {
@@ -103,7 +103,7 @@ public abstract class WallSignLikeBlock extends BaseEntityBlock implements Simpl
 	}
 
 	private boolean tryApplyInkSac(Level level, SignLikeBlockEntity entity) {
-		if (entity.updateCoupletText((text) -> new SignLikeText(text.messages(), text.color(), false))) {
+		if (entity.updateSignLikeText((text) -> new SignLikeText(text.messages(), text.color(), false))) {
 			level.playSound(null, entity.getBlockPos(), SoundEvents.INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
 			return true;
 		} else {
@@ -112,7 +112,7 @@ public abstract class WallSignLikeBlock extends BaseEntityBlock implements Simpl
 	}
 
 	private boolean tryApplyGlowInkSac(Level level, SignLikeBlockEntity entity) {
-		if (entity.updateCoupletText((text) -> new SignLikeText(text.messages(), text.color(), true))) {
+		if (entity.updateSignLikeText((text) -> new SignLikeText(text.messages(), text.color(), true))) {
 			level.playSound(null, entity.getBlockPos(), SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
 			return true;
 		} else {
@@ -121,12 +121,21 @@ public abstract class WallSignLikeBlock extends BaseEntityBlock implements Simpl
 	}
 
 	@Override
-	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-		return super.useWithoutItem(state, level, pos, player, hitResult);
-	}
-
-	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+		if (level.getBlockEntity(pos) instanceof SignLikeBlockEntity entity) {
+			if (stack.getItem() instanceof DyeItem item && tryApplyDye(level, entity, item)) {
+				stack.consume(1, player);
+				return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			}
+			if (stack.getItem() == Items.INK_SAC && tryApplyInkSac(level, entity)) {
+				stack.consume(1, player);
+				return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			}
+			if (stack.getItem() == Items.GLOW_INK_SAC && tryApplyGlowInkSac(level, entity)) {
+				stack.consume(1, player);
+				return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			}
+		}
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 }

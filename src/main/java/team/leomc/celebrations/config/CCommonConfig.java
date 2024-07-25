@@ -17,8 +17,8 @@ public class CCommonConfig {
 
 	static {
 		BUILDER.push("celebration");
-		CELEBRATION_INTERVAL = BUILDER.comment("The interval of the villagers' celebrations, in ticks (1 sec = 20 ticks)").define("celebrationInterval", 12000 * 2 * 30);
-		CELEBRATION_DURATION = BUILDER.comment("The duration of the villagers' celebrations, in ticks (1 sec = 20 ticks)").define("celebrationDuration", 12000 * 2 * 2);
+		CELEBRATION_INTERVAL = BUILDER.comment("The interval of the villagers' celebrations, in ticks (1 second = 20 ticks)").define("celebrationInterval", 12000 * 2 * 30);
+		CELEBRATION_DURATION = BUILDER.comment("The duration of the villagers' celebrations, in ticks (1 second = 20 ticks)").define("celebrationDuration", 12000 * 2 * 2);
 		BUILDER.pop();
 		BUILDER.push("lantern");
 		LANTERN_EFFECT_RADIUS = BUILDER.comment("This parameter determines the range of action of the lantern's potion effect").define("effectRange", 10d);

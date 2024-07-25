@@ -28,5 +28,13 @@ public class CNetwork {
 				OpenCoupletEditScreenPayload::handle
 			)
 		);
+		registrar.playToClient(
+			OpenHorizontalScrollEditScreenPayload.TYPE,
+			OpenHorizontalScrollEditScreenPayload.STREAM_CODEC,
+			new DirectionalPayloadHandler<>(
+				OpenHorizontalScrollEditScreenPayload::handle,
+				OpenHorizontalScrollEditScreenPayload::handle
+			)
+		);
 	}
 }

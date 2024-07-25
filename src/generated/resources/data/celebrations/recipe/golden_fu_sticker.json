@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "celebrations:gold_powder"
+    },
+    "X": {
+      "item": "celebrations:red_paper"
+    }
+  },
+  "pattern": [
+    " X ",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebrations:golden_fu_sticker"
+  }
+}

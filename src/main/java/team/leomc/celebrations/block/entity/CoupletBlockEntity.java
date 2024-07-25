@@ -8,4 +8,9 @@ public class CoupletBlockEntity extends SignLikeBlockEntity {
 	public CoupletBlockEntity(BlockPos pos, BlockState state) {
 		super(CBlockEntities.COUPLET.get(), pos, state);
 	}
+
+	@Override
+	public int getMaxTextLineWidth() {
+		return 22;
+	}
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "celebrations:inverted_golden_fu_sticker"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "celebrations:blocks/inverted_golden_fu_sticker"
+}

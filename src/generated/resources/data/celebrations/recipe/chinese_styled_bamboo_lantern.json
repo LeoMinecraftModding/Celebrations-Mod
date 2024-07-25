@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "X": {
+      "item": "minecraft:bamboo"
+    }
+  },
+  "pattern": [
+    "XSX",
+    "X#X",
+    "XSX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebrations:chinese_styled_bamboo_lantern"
+  }
+}

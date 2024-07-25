@@ -12,6 +12,7 @@ import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import team.leomc.celebrations.Celebrations;
+import team.leomc.celebrations.ai.VillagerCelebrationAI;
 import team.leomc.celebrations.block.entity.LanternBlockEntity;
 import team.leomc.celebrations.command.CelebrationsCommand;
 import team.leomc.celebrations.registry.CItems;
@@ -39,7 +40,7 @@ public class CEvents {
 	}
 
 	@SubscribeEvent
-	public static void onLevelTick(LevelTickEvent.Post event) {
+	public static void onPostLevelTick(LevelTickEvent.Post event) {
 		if (event.getLevel() instanceof ServerLevel serverLevel) {
 			CelebrationSavedData celebrationSavedData = CelebrationUtils.getCelebrationData(serverLevel);
 			if (celebrationSavedData != null) {
@@ -49,7 +50,7 @@ public class CEvents {
 	}
 
 	@SubscribeEvent
-	public static void onLivingTick(EntityTickEvent.Post event) {
+	public static void onPostEntityTick(EntityTickEvent.Post event) {
 		if (event.getEntity() instanceof Villager villager && !villager.level().isClientSide) {
 			if (villager.tickCount % 100 == 0) {
 				if (LanternUtils.getVillagerLanternBlock(villager).defaultBlockState().isAir()) {
@@ -74,17 +75,17 @@ public class CEvents {
 
 					if (lanternPos != null) {
 						CompoundTag tag = villager.getPersistentData();
-						tag.putString("LanternDim", serverLevel.dimension().location().toString());
-						tag.putIntArray("LanternPos", new int[]{lanternPos.getX(), lanternPos.getY(), lanternPos.getZ()});
+						tag.putString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION, serverLevel.dimension().location().toString());
+						tag.putIntArray(VillagerCelebrationAI.TAG_LANTERN_POS, new int[]{lanternPos.getX(), lanternPos.getY(), lanternPos.getZ()});
 					}
 				}
 				CelebrationSavedData celebrationSavedData = CelebrationUtils.getCelebrationData(serverLevel);
 				if (celebrationSavedData != null) {
-					boolean refreshed = villager.getPersistentData().getBoolean("BrainRefreshedForCelebration");
+					boolean refreshed = villager.getPersistentData().getBoolean(VillagerCelebrationAI.TAG_BRAIN_REFRESHED_FOR_CELEBRATION);
 					boolean should = celebrationSavedData.isCelebrating();
 					if (refreshed != should) {
 						villager.refreshBrain(serverLevel);
-						villager.getPersistentData().putBoolean("BrainRefreshedForCelebration", should);
+						villager.getPersistentData().putBoolean(VillagerCelebrationAI.TAG_BRAIN_REFRESHED_FOR_CELEBRATION, should);
 					}
 				}
 			}

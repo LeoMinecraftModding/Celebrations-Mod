@@ -6,7 +6,7 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import team.leomc.celebrations.item.LanternBlockItem;
+import team.leomc.celebrations.item.LanternItem;
 
 public class LanternUtils {
 	public static ItemStack getVillagerLanternItem(Villager villager) {
@@ -16,7 +16,7 @@ public class LanternUtils {
 	}
 
 	public static Block getVillagerLanternBlock(Villager villager) {
-		if (getVillagerLanternItem(villager).getItem() instanceof LanternBlockItem blockItem) {
+		if (getVillagerLanternItem(villager).getItem() instanceof LanternItem blockItem) {
 			return blockItem.getBlock();
 		} else return Blocks.AIR;
 	}

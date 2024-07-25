@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,10 +33,15 @@ public class CoupletBlock extends WallSignLikeBlock {
 	}
 
 	@Override
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return super.canSurvive(state, level, pos) && level.getBlockState(pos.below()).isAir() && !level.getBlockState(pos.above()).is(this);
+	}
+
+	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			PacketDistributor.sendToPlayer(serverPlayer, new OpenCoupletEditScreenPayload(pos));
 		}
-		return super.useWithoutItem(state, level, pos, player, hitResult);
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 }

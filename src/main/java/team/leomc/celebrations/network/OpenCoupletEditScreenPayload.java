@@ -13,7 +13,7 @@ import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.block.entity.CoupletBlockEntity;
-import team.leomc.celebrations.client.gui.screens.CoupletEditScreen;
+import team.leomc.celebrations.client.gui.screen.CoupletEditScreen;
 
 public record OpenCoupletEditScreenPayload(BlockPos pos) implements CustomPacketPayload {
 	public static final Type<OpenCoupletEditScreenPayload> TYPE = new Type<>(Celebrations.id("open_couplet_edit"));

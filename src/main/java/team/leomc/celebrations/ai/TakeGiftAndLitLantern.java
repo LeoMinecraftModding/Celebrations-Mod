@@ -2,6 +2,7 @@ package team.leomc.celebrations.ai;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,7 +45,7 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
 			coolDown = 1200;
 			return false;
 		}
-		if (villager.getPersistentData().getString("LanternDim").isEmpty() || villager.getPersistentData().getIntArray("LanternPos").length == 0) {
+		if (villager.getPersistentData().getString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION).isEmpty() || villager.getPersistentData().getIntArray(VillagerCelebrationAI.TAG_LANTERN_POS).length == 0) {
 			coolDown = 200;
 			return false;
 		}
@@ -56,8 +57,8 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
 		this.coolDown = 20 * (level.random.nextInt(11) + 5);
 		this.ticksSinceReached = 0;
 
-		String lanternDim = villager.getPersistentData().getString("LanternDim");
-		int[] lanternPos = villager.getPersistentData().getIntArray("LanternPos");
+		String lanternDim = villager.getPersistentData().getString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION);
+		int[] lanternPos = villager.getPersistentData().getIntArray(VillagerCelebrationAI.TAG_LANTERN_POS);
 		targetPos = new BlockPos(lanternPos[0], lanternPos[1], lanternPos[2]);
 
 		if (!level.dimension().location().toString().equals(lanternDim) || !isValidLanternAt(level, targetPos)) {
@@ -98,8 +99,7 @@ public class TakeGiftAndLitLantern extends Behavior<Villager> {
 					if (level.getBlockEntity(targetPos) instanceof LanternBlockEntity lanternBlockEntity) {
 						villager.setItemSlot(EquipmentSlot.MAINHAND, lanternBlockEntity.getGift());
 						lanternBlockEntity.setGift(ItemStack.EMPTY);
-						/*lanternBlockEntity.setGiftOwnerType("");
-						lanternBlockEntity.setGiftOwnerName("");*/
+						lanternBlockEntity.setGiftSender(Component.empty());
 					}
 					BlockState lanternState = level.getBlockState(targetPos);
 					if (lanternState.hasProperty(BlockStateProperties.LIT) && !lanternState.getValue(BlockStateProperties.LIT)) {

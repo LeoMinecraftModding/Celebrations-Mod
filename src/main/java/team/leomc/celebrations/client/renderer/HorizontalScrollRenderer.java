@@ -51,7 +51,7 @@ public class HorizontalScrollRenderer extends SignLikeRenderer<HorizontalScrollB
 	protected void translateSignLikeText(PoseStack stack) {
 		float scale = 1.5f;
 		float f = 0.015625F * scale;
-		stack.translate(0, -22f / 16f, 0);
+		stack.translate(0.3f / 16f, -22f / 16f, 0.001);
 		stack.scale(f, -f, f);
 	}
 

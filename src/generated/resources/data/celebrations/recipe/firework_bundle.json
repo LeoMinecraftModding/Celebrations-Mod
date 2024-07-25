@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:firework_rocket"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "SSS"
+  ],
+  "result": {
+    "components": {
+      "celebrations:firework_amount": 6
+    },
+    "count": 1,
+    "id": "celebrations:firework_bundle"
+  }
+}

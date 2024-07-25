@@ -41,7 +41,7 @@ public class RemoveLantern extends Behavior<Villager> {
 			coolDown = 1200;
 			return false;
 		}
-		if (villager.getPersistentData().getString("LanternDim").isEmpty() || (villager.getPersistentData().getIntArray("LanternPos").length < 3)) {
+		if (villager.getPersistentData().getString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION).isEmpty() || (villager.getPersistentData().getIntArray(VillagerCelebrationAI.TAG_LANTERN_POS).length < 3)) {
 			coolDown = 12000;
 			return false;
 		}
@@ -53,8 +53,8 @@ public class RemoveLantern extends Behavior<Villager> {
 		this.coolDown = 20 * (level.random.nextInt(11) + 5);
 		this.ticksSinceReached = 0;
 
-		String lanternDim = villager.getPersistentData().getString("LanternDim");
-		int[] lanternPos = villager.getPersistentData().getIntArray("LanternPos");
+		String lanternDim = villager.getPersistentData().getString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION);
+		int[] lanternPos = villager.getPersistentData().getIntArray(VillagerCelebrationAI.TAG_LANTERN_POS);
 		if (lanternDim.equals(villager.level().dimension().location().toString()) && lanternPos.length >= 3) {
 			targetPos = new BlockPos(lanternPos[0], lanternPos[1], lanternPos[2]);
 		}
@@ -89,8 +89,8 @@ public class RemoveLantern extends Behavior<Villager> {
 				if (ticksSinceReached > 10) {
 					level.setBlockAndUpdate(targetPos, Blocks.AIR.defaultBlockState());
 					CompoundTag tag = villager.getPersistentData();
-					tag.putString("LanternDim", "");
-					tag.putIntArray("LanternPos", new int[]{});
+					tag.putString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION, "");
+					tag.putIntArray(VillagerCelebrationAI.TAG_LANTERN_POS, new int[]{});
 					targetPos = null;
 				}
 			}

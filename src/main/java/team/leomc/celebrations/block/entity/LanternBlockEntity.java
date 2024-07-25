@@ -70,6 +70,10 @@ public class LanternBlockEntity extends BlockEntity {
 		return lantern.gift();
 	}
 
+	public void setGiftSender(Component giftSender) {
+		this.lantern = new Lantern(lantern.effects(), lantern.gift(), giftSender);
+	}
+
 	public Component getGiftSender() {
 		return lantern.giftSender();
 	}
@@ -77,13 +81,13 @@ public class LanternBlockEntity extends BlockEntity {
 	@Override
 	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.loadAdditional(tag, registries);
-		this.lantern = Lantern.fromTag(tag.getCompound("Lantern"), registries);
+		this.lantern = Lantern.fromTag(tag.getCompound("lantern"), registries);
 	}
 
 	@Override
 	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.saveAdditional(tag, registries);
-		tag.put("Lantern", lantern.toTag(registries));
+		tag.put("lantern", lantern.toTag(registries));
 	}
 
 	private static void tryGiveEffect(MobEffectInstance instance, LivingEntity entity) {
@@ -119,10 +123,10 @@ public class LanternBlockEntity extends BlockEntity {
 			for (LivingEntity livingEntity : level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(radius))) {
 				for (MobEffectInstance instance : entity.getEffects()) {
 					MobEffectInstance toGive = new MobEffectInstance(instance.getEffect(), 400, instance.getAmplifier());
-					if (livingEntity instanceof Enemy && ((instance.getEffect().value().isBeneficial() && giveEnemyBeneficialEffect) || giveEnemyHarmfulEffect)) {
+					if (livingEntity instanceof Enemy && ((instance.getEffect().value().isBeneficial() && giveEnemyBeneficialEffect) || (!instance.getEffect().value().isBeneficial() && giveEnemyHarmfulEffect))) {
 						tryGiveEffect(toGive, livingEntity);
 					}
-					if (!(livingEntity instanceof Enemy) && ((instance.getEffect().value().isBeneficial() && giveNonEnemyBeneficialEffect) || giveNonEnemyHarmfulEffect)) {
+					if (!(livingEntity instanceof Enemy) && ((instance.getEffect().value().isBeneficial() && giveNonEnemyBeneficialEffect) || (!instance.getEffect().value().isBeneficial() && giveNonEnemyHarmfulEffect))) {
 						tryGiveEffect(toGive, livingEntity);
 					}
 				}

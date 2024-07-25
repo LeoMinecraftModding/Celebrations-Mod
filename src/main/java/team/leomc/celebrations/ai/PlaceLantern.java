@@ -16,11 +16,13 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
+import team.leomc.celebrations.block.entity.LanternBlockEntity;
 import team.leomc.celebrations.util.CelebrationUtils;
 import team.leomc.celebrations.util.LanternUtils;
 
@@ -48,7 +50,7 @@ public class PlaceLantern extends Behavior<Villager> {
 			coolDown = 1200;
 			return false;
 		}
-		if (LanternUtils.getVillagerLanternBlock(villager).defaultBlockState().isAir() || (!villager.getPersistentData().getString("LanternDim").isEmpty() && (villager.getPersistentData().getIntArray("LanternPos").length >= 3))) {
+		if (LanternUtils.getVillagerLanternBlock(villager).defaultBlockState().isAir() || (!villager.getPersistentData().getString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION).isEmpty() && (villager.getPersistentData().getIntArray(VillagerCelebrationAI.TAG_LANTERN_POS).length >= 3))) {
 			coolDown = 12000;
 			return false;
 		}
@@ -95,18 +97,17 @@ public class PlaceLantern extends Behavior<Villager> {
 					SoundType soundType = state.getSoundType();
 					level.playSound(null, targetPos, soundType.getPlaceSound(), SoundSource.BLOCKS, soundType.getVolume(), soundType.getPitch());
 
-					/*if (level.getBlockEntity(targetPos) instanceof LanternBlockEntity lanternBlockEntity) {
+					if (level.getBlockEntity(targetPos) instanceof LanternBlockEntity lanternBlockEntity) {
 						// TODO: loot table
 						ItemStack gift = Items.EMERALD.getDefaultInstance();
 
 						lanternBlockEntity.setGift(gift);
-						lanternBlockEntity.setGiftOwnerType("Mob");
-						lanternBlockEntity.setGiftOwnerName(villager.getDisplayName().getString());
-					}*/
+						lanternBlockEntity.setGiftSender(villager.getDisplayName());
+					}
 
 					CompoundTag tag = villager.getPersistentData();
-					tag.putString("LanternDim", level.dimension().location().toString());
-					tag.putIntArray("LanternPos", new int[]{targetPos.getX(), targetPos.getY(), targetPos.getZ()});
+					tag.putString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION, level.dimension().location().toString());
+					tag.putIntArray(VillagerCelebrationAI.TAG_LANTERN_POS, new int[]{targetPos.getX(), targetPos.getY(), targetPos.getZ()});
 					targetPos = null;
 				}
 			}

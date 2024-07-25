@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "celebrations:inverted_golden_fu_sticker"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebrations:golden_fu_sticker"
+  }
+}
