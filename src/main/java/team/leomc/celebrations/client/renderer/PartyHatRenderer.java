@@ -15,37 +15,40 @@ import team.leomc.celebrations.client.CRenderType;
 public class PartyHatRenderer {
 	public static final ResourceLocation PARTY_HAT = Celebrations.id("textures/entity/party_hat.png");
 
-	public static void render(ResourceLocation texture, boolean overlay, PoseStack poseStack, MultiBufferSource buffer, int color, int packedLight) {
+	public static void render(ResourceLocation texture, float scale, boolean overlay, PoseStack poseStack, MultiBufferSource buffer, int color, int packedLight) {
 		VertexConsumer consumer = buffer.getBuffer(CRenderType.entityCutoutNoCullTriangles(texture));
 
-		PoseStack.Pose pose = poseStack.last();
-		float hatRadius = overlay ? 3.0001f / 16f : 3f / 16f;
-		float hatHeight = 0.5f;
-		float cubeRadius = overlay ? 0.0626f : 0.0625f;
-
-		vertex(consumer, pose, hatRadius, 0, hatRadius, 0, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, -hatRadius, 0, hatRadius, 1, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
-
-		vertex(consumer, pose, hatRadius, 0, -hatRadius, 0, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, -hatRadius, 0, -hatRadius, 1, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
-
-		vertex(consumer, pose, hatRadius, 0, hatRadius, 0, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, hatRadius, 0, -hatRadius, 1, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
-
-		vertex(consumer, pose, -hatRadius, 0, hatRadius, 0, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, -hatRadius, 0, -hatRadius, 1, 11f / 17f, color, packedLight);
-		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
+		float hatRadius = overlay ? 3f / 16f + 0.001f : 3f / 16f;
+		float hatBottom = overlay ? -0.001f : 0;
+		float hatHeight = overlay ? 0.501f : 0.5f;
+		float cubeRadius = overlay ? 0.0635f : 0.0625f;
 
 		poseStack.pushPose();
+		poseStack.scale(scale, scale, scale);
+		PoseStack.Pose pose = poseStack.last();
+
+		vertex(consumer, pose, hatRadius, hatBottom, hatRadius, 0, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, -hatRadius, hatBottom, hatRadius, 1, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
+
+		vertex(consumer, pose, hatRadius, hatBottom, -hatRadius, 0, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, -hatRadius, hatBottom, -hatRadius, 1, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
+
+		vertex(consumer, pose, hatRadius, hatBottom, hatRadius, 0, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, hatRadius, hatBottom, -hatRadius, 1, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
+
+		vertex(consumer, pose, -hatRadius, hatBottom, hatRadius, 0, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, -hatRadius, hatBottom, -hatRadius, 1, 11f / 17f, color, packedLight);
+		vertex(consumer, pose, 0, hatHeight, 0, 0.5f, 2.5f / 17f, color, packedLight);
+
 		VertexConsumer quadsConsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(texture));
 
-		vertex(quadsConsumer, pose, hatRadius, 0, hatRadius, 0, 11f / 17f, color, packedLight);
-		vertex(quadsConsumer, pose, hatRadius, 0, -hatRadius, 0, 1, color, packedLight);
-		vertex(quadsConsumer, pose, -hatRadius, 0, -hatRadius, 1, 1, color, packedLight);
-		vertex(quadsConsumer, pose, -hatRadius, 0, hatRadius, 1, 11f / 17f, color, packedLight);
+		vertex(quadsConsumer, pose, hatRadius, hatBottom, hatRadius, 0, 11f / 17f, color, packedLight);
+		vertex(quadsConsumer, pose, hatRadius, hatBottom, -hatRadius, 0, 1, color, packedLight);
+		vertex(quadsConsumer, pose, -hatRadius, hatBottom, -hatRadius, 1, 1, color, packedLight);
+		vertex(quadsConsumer, pose, -hatRadius, hatBottom, hatRadius, 1, 11f / 17f, color, packedLight);
 
 		poseStack.translate(0, 0.5f, 0);
 		pose = poseStack.last();

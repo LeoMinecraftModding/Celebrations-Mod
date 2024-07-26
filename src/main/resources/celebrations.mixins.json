@@ -5,11 +5,18 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "celebrations.refmap.json",
   "mixins": [
+    "CakeBlockMixin",
+    "CelebrateVillagersSurvivedRaidMixin",
+    "MobMixin",
     "VillagerMixin"
   ],
   "client": [
+    "AllayModelMixin",
+    "AllayRendererMixin",
     "CustomHeadLayerMixin",
-    "ItemInHandRendererMixin"
+    "ItemInHandRendererMixin",
+    "VexModelMixin",
+    "VexRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

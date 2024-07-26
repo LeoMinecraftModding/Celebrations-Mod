@@ -25,7 +25,7 @@ public class PartyHatRecipe extends CustomRecipe {
 
 	@Override
 	public boolean matches(CraftingInput craftingInput, Level level) {
-		if (craftingInput.items().stream().anyMatch(stack -> !stack.is(CItems.PARTY_HAT.get()) && !stack.is(CTags.Items.PARTY_HAT_PATTERN_INGREDIENTS) && !(stack.getItem() instanceof DyeItem))) {
+		if (craftingInput.items().stream().anyMatch(stack -> !stack.isEmpty() && !stack.is(CItems.PARTY_HAT.get()) && !stack.is(CTags.Items.PARTY_HAT_PATTERN_INGREDIENTS) && !(stack.getItem() instanceof DyeItem))) {
 			return false;
 		}
 		if (craftingInput.items().stream().filter(stack -> stack.is(CTags.Items.PARTY_HAT_PATTERN_INGREDIENTS)).count() != 1) {

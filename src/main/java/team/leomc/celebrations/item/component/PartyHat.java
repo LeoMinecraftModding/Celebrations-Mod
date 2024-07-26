@@ -2,6 +2,10 @@ package team.leomc.celebrations.item.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -19,9 +23,20 @@ public record PartyHat(PartyHatType type, DyeColor color) {
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, PartyHat> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
+	public static final PartyHat DEFAULT = new PartyHat(PartyHatType.STRIPES, DyeColor.RED);
+
 	public ResourceLocation getTextureLocation() {
 		return Celebrations.id("textures/entity/party_hat_" + type().getSerializedName() + ".png");
 	}
+
+	public static PartyHat fromTag(Tag tag, HolderLookup.Provider provider) {
+		return CODEC.parse(provider.createSerializationContext(NbtOps.INSTANCE), tag).resultOrPartial().orElse(DEFAULT);
+	}
+
+	public Tag toTag(HolderLookup.Provider provider) {
+		return CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), this).resultOrPartial().orElseGet(CompoundTag::new);
+	}
+
 
 	@Override
 	public boolean equals(Object o) {

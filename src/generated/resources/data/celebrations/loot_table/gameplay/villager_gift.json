@@ -202,11 +202,23 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.5,
+              "condition": "minecraft:random_chance"
+            }
+          ],
           "name": "minecraft:emerald",
           "weight": 50
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.3,
+              "condition": "minecraft:random_chance"
+            }
+          ],
           "name": "minecraft:diamond",
           "weight": 20
         }

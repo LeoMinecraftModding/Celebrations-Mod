@@ -36,5 +36,13 @@ public class CNetwork {
 				OpenHorizontalScrollEditScreenPayload::handle
 			)
 		);
+		registrar.playToClient(
+			UpdateMobPartyHatPayload.TYPE,
+			UpdateMobPartyHatPayload.STREAM_CODEC,
+			new DirectionalPayloadHandler<>(
+				UpdateMobPartyHatPayload::handle,
+				UpdateMobPartyHatPayload::handle
+			)
+		);
 	}
 }
