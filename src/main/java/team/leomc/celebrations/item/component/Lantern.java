@@ -1,4 +1,4 @@
-package team.leomc.celebrations.util;
+package team.leomc.celebrations.item.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,12 +15,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public record Lantern(List<MobEffectInstance> effects, ItemStack gift, Component giftSender) {
+public record Lantern(ArrayList<MobEffectInstance> effects, ItemStack gift, Component giftSender) {
 	public static final Codec<Lantern> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-		MobEffectInstance.CODEC.listOf().fieldOf("effects").forGetter(Lantern::effects),
+		MobEffectInstance.CODEC.listOf().xmap(ArrayList::new, l -> l).fieldOf("effects").forGetter(Lantern::effects),
 		ItemStack.OPTIONAL_CODEC.fieldOf("gift").forGetter(Lantern::gift),
 		ComponentSerialization.CODEC.fieldOf("gift_sender").forGetter(Lantern::giftSender)
 	).apply(instance, Lantern::new));

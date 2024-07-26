@@ -7,6 +7,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import team.leomc.celebrations.Celebrations;
+import team.leomc.celebrations.item.recipe.PartyHatRecipe;
 import team.leomc.celebrations.registry.CDataComponents;
 import team.leomc.celebrations.registry.CItems;
 
@@ -144,5 +145,14 @@ public class CRecipeProvider extends RecipeProvider {
 			.pattern("SSS")
 			.unlockedBy("has_firework_rocket", has(Items.FIREWORK_ROCKET))
 			.save(recipeOutput);
+
+		ShapedRecipeBuilder
+			.shaped(RecipeCategory.MISC, CItems.PARTY_HAT.get())
+			.define('#', Items.PAPER)
+			.pattern(" # ")
+			.pattern("# #")
+			.unlockedBy("has_paper", has(Items.PAPER))
+			.save(recipeOutput);
+		SpecialRecipeBuilder.special(PartyHatRecipe::new).save(recipeOutput, Celebrations.id("party_hat_patterns"));
 	}
 }

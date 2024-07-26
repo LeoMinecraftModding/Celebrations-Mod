@@ -1,4 +1,4 @@
-// 1.21	2024-07-25T16:38:12.8510455	Item Models: celebrations
+// 1.21	2024-07-26T11:42:10.7600866	Item Models: celebrations
 4a0465436abc24d1696617288f0597d06b41a9d7 assets/celebrations/models/item/chinese_styled_bamboo_lantern.json
 456fb978cf2a416a9cfad9e18fbde0ee711352c4 assets/celebrations/models/item/chinese_styled_paper_lantern.json
 d716b049310b4b1e98454511dfd779b66711ea88 assets/celebrations/models/item/chinese_styled_red_lantern.json
@@ -12,4 +12,8 @@ d73182009e2de904fea11e390305dac7bd0344e2 assets/celebrations/models/item/inverte
 6b056f9b962173f814ece2d2cb97ae92de0ffde3 assets/celebrations/models/item/inverted_golden_fu_sticker.json
 feda15bad05959efe9a53f7320f934145f9814fc assets/celebrations/models/item/japanese_styled_paper_lantern.json
 4fbb0a3dc5c86da7ba2421d07642cd685fb225ac assets/celebrations/models/item/japanese_styled_red_lantern.json
+790956409ea913f6ce644e89d969f0a964203212 assets/celebrations/models/item/party_hat.json
+47b0eb0ac35efa0f936ea5c1639e6a68b64f48e8 assets/celebrations/models/item/party_hat_dots.json
+ad0ab91d6775aabab8c6d518b1847701f2d9082e assets/celebrations/models/item/party_hat_stripes.json
+aad7cac0dd6d55089a023155a6d15aace47d7a84 assets/celebrations/models/item/party_hat_tilt_stripes.json
 4d698bb0e768d127511ce92891c6b7f0af24f0af assets/celebrations/models/item/red_paper.json

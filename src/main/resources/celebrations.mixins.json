@@ -8,6 +8,8 @@
     "VillagerMixin"
   ],
   "client": [
+    "CustomHeadLayerMixin",
+    "ItemInHandRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

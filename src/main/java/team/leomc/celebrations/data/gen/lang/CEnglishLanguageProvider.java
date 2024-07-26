@@ -28,6 +28,10 @@ public class CEnglishLanguageProvider extends LanguageProvider {
 		add(CBlocks.FIREWORK_BUNDLE.get(), "Firework Bundle");
 		add(CItems.RED_PAPER.get(), "Red Paper");
 		add(CItems.GOLD_POWDER.get(), "Gold Powder");
+		add(CItems.PARTY_HAT.get(), "Party Hat");
+		add("party_hat_type." + Celebrations.ID + ".stripes", " Stripes");
+		add("party_hat_type." + Celebrations.ID + ".tilt_stripes", " Tilt Stripes");
+		add("party_hat_type." + Celebrations.ID + ".dots", " Dots");
 		tooltip("edit_couplet", "Edit Couplet Text");
 		tooltip("edit_horizontal_scroll", "Edit Horizontal Scroll Text");
 		tooltip("gift", "This lantern contains a gift");

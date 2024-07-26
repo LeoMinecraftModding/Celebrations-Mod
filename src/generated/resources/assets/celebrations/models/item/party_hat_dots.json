@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "celebrations:item/party_hat",
+    "layer1": "celebrations:item/party_hat_dots"
+  }
+}

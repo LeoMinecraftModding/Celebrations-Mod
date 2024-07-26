@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import team.leomc.celebrations.Celebrations;
@@ -31,6 +32,28 @@ public class CItemModelProvider extends ItemModelProvider {
 		block(CItems.FIREWORK_BUNDLE.get());
 		basicItem(CItems.RED_PAPER.get());
 		basicItem(CItems.GOLD_POWDER.get());
+		partyHat(CItems.PARTY_HAT.get());
+	}
+
+	private void partyHat(Item item) {
+		ModelFile stripes = this.getBuilder(name(item) + "_stripes")
+			.parent(new ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", itemTexture(item))
+			.texture("layer1", itemTexture(item).withSuffix("_stripes"));
+		ModelFile tiltStripes = this.getBuilder(name(item) + "_tilt_stripes")
+			.parent(new ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", itemTexture(item))
+			.texture("layer1", itemTexture(item).withSuffix("_tilt_stripes"));
+		ModelFile dots = this.getBuilder(name(item) + "_dots")
+			.parent(new ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", itemTexture(item))
+			.texture("layer1", itemTexture(item).withSuffix("_dots"));
+		this.getBuilder(name(item))
+			.parent(new ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", itemTexture(item))
+			.override().predicate(Celebrations.id("party_hat_type"), 0.1f).model(stripes).end()
+			.override().predicate(Celebrations.id("party_hat_type"), 0.2f).model(tiltStripes).end()
+			.override().predicate(Celebrations.id("party_hat_type"), 0.3f).model(dots).end();
 	}
 
 	private void block(Item item) {

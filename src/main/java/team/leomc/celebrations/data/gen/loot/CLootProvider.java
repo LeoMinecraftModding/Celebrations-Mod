@@ -12,7 +12,8 @@ import java.util.concurrent.CompletableFuture;
 public class CLootProvider extends LootTableProvider {
 	public CLootProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
 		super(packOutput, Set.of(), List.of(
-			new SubProviderEntry(CBlockLootSubProvider::new, LootContextParamSets.BLOCK)
+			new SubProviderEntry(CBlockLootSubProvider::new, LootContextParamSets.BLOCK),
+			new SubProviderEntry(CGiftLootSubProvider::new, LootContextParamSets.GIFT)
 		), provider);
 	}
 }

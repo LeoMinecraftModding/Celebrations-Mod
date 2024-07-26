@@ -20,6 +20,7 @@ public class Celebrations {
 		CDataComponents.DATA_COMPONENTS.register(modBus);
 		CItems.ITEMS.register(modBus);
 		CCreativeModeTabs.TABS.register(modBus);
+		CRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
 	}
 
 	public static ResourceLocation id(String path) {

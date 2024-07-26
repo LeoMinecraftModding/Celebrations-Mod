@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -20,11 +21,18 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 import team.leomc.celebrations.block.entity.LanternBlockEntity;
+import team.leomc.celebrations.data.CLootTables;
 import team.leomc.celebrations.util.CelebrationUtils;
 import team.leomc.celebrations.util.LanternUtils;
+
+import java.util.List;
 
 public class PlaceLantern extends Behavior<Villager> {
 	private final float speedModifier;
@@ -97,12 +105,21 @@ public class PlaceLantern extends Behavior<Villager> {
 					SoundType soundType = state.getSoundType();
 					level.playSound(null, targetPos, soundType.getPlaceSound(), SoundSource.BLOCKS, soundType.getVolume(), soundType.getPitch());
 
-					if (level.getBlockEntity(targetPos) instanceof LanternBlockEntity lanternBlockEntity) {
-						// TODO: loot table
+					if (!level.isClientSide && level.getBlockEntity(targetPos) instanceof LanternBlockEntity blockEntity) {
 						ItemStack gift = Items.EMERALD.getDefaultInstance();
 
-						lanternBlockEntity.setGift(gift);
-						lanternBlockEntity.setGiftSender(villager.getDisplayName());
+						MinecraftServer server = villager.level().getServer();
+						if (server != null) {
+							LootTable table = server.reloadableRegistries().getLootTable(CLootTables.VILLAGER_GIFT);
+							LootParams params = new LootParams.Builder((ServerLevel) villager.level()).withParameter(LootContextParams.ORIGIN, villager.position()).withParameter(LootContextParams.THIS_ENTITY, villager).create(LootContextParamSets.GIFT);
+							List<ItemStack> list = table.getRandomItems(params).stream().filter(stack -> !stack.isEmpty()).toList();
+							if (!list.isEmpty()) {
+								gift = list.get(villager.getRandom().nextInt(list.size()));
+							}
+						}
+
+						blockEntity.setGift(gift);
+						blockEntity.setGiftSender(villager.getDisplayName());
 					}
 
 					CompoundTag tag = villager.getPersistentData();

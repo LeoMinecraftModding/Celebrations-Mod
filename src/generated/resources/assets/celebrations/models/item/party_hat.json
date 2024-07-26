@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "celebrations:item/party_hat_stripes",
+      "predicate": {
+        "celebrations:party_hat_type": 0.1
+      }
+    },
+    {
+      "model": "celebrations:item/party_hat_tilt_stripes",
+      "predicate": {
+        "celebrations:party_hat_type": 0.2
+      }
+    },
+    {
+      "model": "celebrations:item/party_hat_dots",
+      "predicate": {
+        "celebrations:party_hat_type": 0.3
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "celebrations:item/party_hat"
+  }
+}

@@ -24,5 +24,22 @@ public class CItemTagsProvider extends ItemTagsProvider {
 			Items.BLAZE_ROD,
 			Items.BLAZE_POWDER
 		);
+		tag(CTags.Items.PARTY_HAT_PATTERN_INGREDIENTS)
+			.addTag(CTags.Items.PARTY_HAT_STRIPES_INGREDIENTS)
+			.addTag(CTags.Items.PARTY_HAT_TILT_STRIPES_INGREDIENTS)
+			.addTag(CTags.Items.PARTY_HAT_DOTS_INGREDIENTS);
+		tag(CTags.Items.PARTY_HAT_STRIPES_INGREDIENTS).add(
+			Items.REDSTONE
+		);
+		tag(CTags.Items.PARTY_HAT_TILT_STRIPES_INGREDIENTS).add(
+			Items.FEATHER
+		);
+		tag(CTags.Items.PARTY_HAT_DOTS_INGREDIENTS).add(
+			Items.WHEAT_SEEDS,
+			Items.MELON_SEEDS,
+			Items.PUMPKIN_SEEDS,
+			Items.BEETROOT_SEEDS,
+			Items.TORCHFLOWER_SEEDS
+		);
 	}
 }

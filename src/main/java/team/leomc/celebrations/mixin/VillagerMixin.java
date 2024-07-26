@@ -10,7 +10,7 @@ import team.leomc.celebrations.ai.VillagerCelebrationAI;
 
 @Mixin(Villager.class)
 public abstract class VillagerMixin {
-	@Inject(method = ("registerBrainGoals"), at = @At("RETURN"))
+	@Inject(method = "registerBrainGoals", at = @At("RETURN"))
 	protected void registerBrainGoals(Brain<Villager> brain, CallbackInfo ci) {
 		VillagerCelebrationAI.initVillagerBrain(brain, ((Villager) (Object) this));
 	}

@@ -1,4 +1,4 @@
-// 1.21	2024-07-25T16:38:12.8510455	Loot Tables
+// 1.21	2024-07-26T13:49:02.5727059	Loot Tables
 f16854500c1fe7c108a688f323b1d43ec314c7f0 data/celebrations/loot_table/blocks/chinese_styled_bamboo_lantern.json
 60535fb769799b40c4ad680dd775157ca407c7b3 data/celebrations/loot_table/blocks/chinese_styled_paper_lantern.json
 14e52a830878533cee7bb9e1f7ffb84503fd8f53 data/celebrations/loot_table/blocks/chinese_styled_red_lantern.json
@@ -11,3 +11,4 @@ fb43c8227c2caaeb32bd595007ca5dbc85a20b13 data/celebrations/loot_table/blocks/gol
 e1e48f5b29801955968898e511e4dd098c069f22 data/celebrations/loot_table/blocks/inverted_golden_fu_sticker.json
 f615d7c82e77b608ba0a3b8e87b4cc2b895d2446 data/celebrations/loot_table/blocks/japanese_styled_paper_lantern.json
 7b5266b8253cdeddf9c4f7ebbffd74c2ad5826bb data/celebrations/loot_table/blocks/japanese_styled_red_lantern.json
+4825ea7177de3c39d11e36f43b29342952d79f82 data/celebrations/loot_table/gameplay/villager_gift.json

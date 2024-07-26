@@ -13,7 +13,6 @@ import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.EventHooks;
 import team.leomc.celebrations.util.CelebrationUtils;
 
@@ -87,7 +86,7 @@ public class RemoveLantern extends Behavior<Villager> {
 			if (targetPos.closerToCenterThan(villager.position(), 3)) {
 				this.ticksSinceReached++;
 				if (ticksSinceReached > 10) {
-					level.setBlockAndUpdate(targetPos, Blocks.AIR.defaultBlockState());
+					level.destroyBlock(targetPos, false);
 					CompoundTag tag = villager.getPersistentData();
 					tag.putString(VillagerCelebrationAI.TAG_LANTERN_DIMENSION, "");
 					tag.putIntArray(VillagerCelebrationAI.TAG_LANTERN_POS, new int[]{});

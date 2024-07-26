@@ -1,2 +1,6 @@
-// 1.21	2024-07-25T16:38:12.8510455	Tags for minecraft:item mod id celebrations
+// 1.21	2024-07-26T12:46:01.2760845	Tags for minecraft:item mod id celebrations
 de5d3b600b0f32ef2e434007998bb940f8052486 data/celebrations/tags/item/igniters.json
+dd0888fd074a48e67eb367d3e34cc99cabff223e data/celebrations/tags/item/party_hat_dots_ingredients.json
+c20605ed88208cc80e50167fd854aa2ecfac5486 data/celebrations/tags/item/party_hat_pattern_ingredients.json
+5db69586b6c50b2befacf44de1aedc4a5af092fe data/celebrations/tags/item/party_hat_stripes_ingredients.json
+c10570958acb00e25707e686554e3dbf48078f3e data/celebrations/tags/item/party_hat_tilt_stripes_ingredients.json

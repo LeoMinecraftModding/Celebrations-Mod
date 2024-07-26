@@ -5,6 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,8 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import team.leomc.celebrations.config.CCommonConfig;
+import team.leomc.celebrations.item.component.Lantern;
 import team.leomc.celebrations.registry.CBlockEntities;
-import team.leomc.celebrations.util.Lantern;
 
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class LanternBlockEntity extends BlockEntity {
 
 	public void setLantern(Lantern lantern) {
 		this.lantern = lantern;
+		if (this.level != null) {
+			this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		}
 	}
 
 	public void addEffect(MobEffectInstance newInstance) {
@@ -52,10 +56,16 @@ public class LanternBlockEntity extends BlockEntity {
 		if (!hasSame) {
 			lantern.effects().add(newInstance);
 		}
+		if (this.level != null) {
+			this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		}
 	}
 
 	public void clearEffects() {
 		lantern.effects().clear();
+		if (this.level != null) {
+			this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		}
 	}
 
 	public List<MobEffectInstance> getEffects() {
@@ -64,6 +74,9 @@ public class LanternBlockEntity extends BlockEntity {
 
 	public void setGift(ItemStack gift) {
 		this.lantern = new Lantern(lantern.effects(), gift, lantern.giftSender());
+		if (this.level != null) {
+			this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		}
 	}
 
 	public ItemStack getGift() {
@@ -72,10 +85,18 @@ public class LanternBlockEntity extends BlockEntity {
 
 	public void setGiftSender(Component giftSender) {
 		this.lantern = new Lantern(lantern.effects(), lantern.gift(), giftSender);
+		if (this.level != null) {
+			this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		}
 	}
 
 	public Component getGiftSender() {
 		return lantern.giftSender();
+	}
+
+	@Override
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
@@ -88,6 +109,18 @@ public class LanternBlockEntity extends BlockEntity {
 	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.saveAdditional(tag, registries);
 		tag.put("lantern", lantern.toTag(registries));
+	}
+
+	@Override
+	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+		CompoundTag tag = new CompoundTag();
+		tag.put("lantern", lantern.toTag(registries));
+		return tag;
+	}
+
+	@Override
+	public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+		this.lantern = Lantern.fromTag(tag.get("lantern"), lookupProvider);
 	}
 
 	private static void tryGiveEffect(MobEffectInstance instance, LivingEntity entity) {
@@ -131,6 +164,10 @@ public class LanternBlockEntity extends BlockEntity {
 					}
 				}
 			}
+		}
+
+		if (level.getGameTime() % 20 == 0 && !level.isClientSide) {
+			level.sendBlockUpdated(pos, state, state, 3);
 		}
 	}
 }

@@ -28,6 +28,10 @@ public class CChineseLanguageProvider extends LanguageProvider {
 		add(CBlocks.FIREWORK_BUNDLE.get(), "烟花桶");
 		add(CItems.RED_PAPER.get(), "红纸");
 		add(CItems.GOLD_POWDER.get(), "金粉");
+		add(CItems.PARTY_HAT.get(), "派对帽");
+		add("party_hat_type." + Celebrations.ID + ".stripes", "横纹");
+		add("party_hat_type." + Celebrations.ID + ".tilt_stripes", "斜纹");
+		add("party_hat_type." + Celebrations.ID + ".dots", "点状纹");
 		tooltip("edit_couplet", "编辑对联信息");
 		tooltip("edit_horizontal_scroll", "编辑对联横批信息");
 		tooltip("gift", "这盏灯笼装有礼物");

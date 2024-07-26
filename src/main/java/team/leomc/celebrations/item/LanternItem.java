@@ -24,8 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.block.CLanternBlock;
 import team.leomc.celebrations.block.entity.LanternBlockEntity;
+import team.leomc.celebrations.item.component.Lantern;
 import team.leomc.celebrations.registry.CDataComponents;
-import team.leomc.celebrations.util.Lantern;
 
 import java.util.Iterator;
 import java.util.List;
