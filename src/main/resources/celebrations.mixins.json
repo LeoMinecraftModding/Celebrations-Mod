@@ -11,12 +11,12 @@
     "VillagerMixin"
   ],
   "client": [
-    "AllayModelMixin",
-    "AllayRendererMixin",
-    "CustomHeadLayerMixin",
-    "ItemInHandRendererMixin",
-    "VexModelMixin",
-    "VexRendererMixin"
+    "client.AllayModelMixin",
+    "client.AllayRendererMixin",
+    "client.CustomHeadLayerMixin",
+    "client.ItemInHandRendererMixin",
+    "client.VexModelMixin",
+    "client.VexRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

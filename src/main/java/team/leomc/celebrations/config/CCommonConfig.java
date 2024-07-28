@@ -21,11 +21,11 @@ public class CCommonConfig {
 		CELEBRATION_DURATION = BUILDER.comment("The duration of the villagers' celebrations, in ticks (1 second = 20 ticks)").define("celebrationDuration", 12000 * 2 * 2);
 		BUILDER.pop();
 		BUILDER.push("lantern");
-		LANTERN_EFFECT_RADIUS = BUILDER.comment("This parameter determines the range of action of the lantern's potion effect").define("effectRange", 10d);
-		GIVE_NON_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give beneficial effects to non-enemy mobs").define("giveNonEnemyBeneficialEffect", true);
-		GIVE_NON_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give harmful effects to non-enemy mobs").define("giveNonEnemyHarmfulEffect", false);
-		GIVE_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give beneficial effects to enemy mobs").define("giveEnemyBeneficialEffect", false);
-		GIVE_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give harmful effects to enemy mobs").define("giveEnemyHarmfulEffect", true);
+		LANTERN_EFFECT_RADIUS = BUILDER.comment("This parameter determines the range of action of the lantern's potion effect").define("lanternEffectRange", 10d);
+		GIVE_NON_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give beneficial effects to non-enemy mobs").define("lanternGiveNonEnemyBeneficialEffect", true);
+		GIVE_NON_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give harmful effects to non-enemy mobs").define("lanternGiveNonEnemyHarmfulEffect", false);
+		GIVE_ENEMY_BENEFICIAL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give beneficial effects to enemy mobs").define("lanternGiveEnemyBeneficialEffect", false);
+		GIVE_ENEMY_HARMFUL_EFFECT = BUILDER.comment("Enables lanterns with potion effects to give harmful effects to enemy mobs").define("lanternGiveEnemyHarmfulEffect", true);
 		BUILDER.pop();
 		SPEC = BUILDER.build();
 	}

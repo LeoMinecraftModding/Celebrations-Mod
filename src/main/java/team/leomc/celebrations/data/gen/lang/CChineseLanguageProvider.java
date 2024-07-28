@@ -14,6 +14,16 @@ public class CChineseLanguageProvider extends LanguageProvider {
 	@Override
 	protected void addTranslations() {
 		add("name." + Celebrations.ID, "欢庆");
+		add("fml.menu.mods.info.description." + Celebrations.ID, "一个关于庆祝的模组！");
+		add(Celebrations.ID + ".configuration.celebration", "庆祝");
+		add(Celebrations.ID + ".configuration.celebrationInterval", "庆祝时间间隔");
+		add(Celebrations.ID + ".configuration.celebrationDuration", "庆祝时长");
+		add(Celebrations.ID + ".configuration.lantern", "灯笼");
+		add(Celebrations.ID + ".configuration.lanternEffectRange", "灯笼药水效果范围");
+		add(Celebrations.ID + ".configuration.lanternGiveNonEnemyBeneficialEffect", "灯笼给予非敌对生物增益效果");
+		add(Celebrations.ID + ".configuration.lanternGiveNonEnemyHarmfulEffect", "灯笼给予非敌对生物负面效果");
+		add(Celebrations.ID + ".configuration.lanternGiveEnemyBeneficialEffect", "灯笼给予敌对生物增益效果");
+		add(Celebrations.ID + ".configuration.lanternGiveEnemyHarmfulEffect", "灯笼给予敌对生物负面效果");
 		add(CBlocks.CHINESE_STYLED_BAMBOO_LANTERN.get(), "中式竹灯笼");
 		add(CBlocks.CHINESE_STYLED_PAPER_LANTERN.get(), "中式纸灯笼");
 		add(CBlocks.CHINESE_STYLED_RED_LANTERN.get(), "中式红灯笼");

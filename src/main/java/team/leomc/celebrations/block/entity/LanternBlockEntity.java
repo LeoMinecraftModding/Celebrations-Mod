@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
@@ -156,10 +157,13 @@ public class LanternBlockEntity extends BlockEntity {
 			for (LivingEntity livingEntity : level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(radius))) {
 				for (MobEffectInstance instance : entity.getEffects()) {
 					MobEffectInstance toGive = new MobEffectInstance(instance.getEffect(), 400, instance.getAmplifier());
-					if (livingEntity instanceof Enemy && ((instance.getEffect().value().isBeneficial() && giveEnemyBeneficialEffect) || (!instance.getEffect().value().isBeneficial() && giveEnemyHarmfulEffect))) {
+					if (livingEntity instanceof Enemy && ((instance.getEffect().value().isBeneficial() && giveEnemyBeneficialEffect) || (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL && giveEnemyHarmfulEffect))) {
 						tryGiveEffect(toGive, livingEntity);
 					}
-					if (!(livingEntity instanceof Enemy) && ((instance.getEffect().value().isBeneficial() && giveNonEnemyBeneficialEffect) || (!instance.getEffect().value().isBeneficial() && giveNonEnemyHarmfulEffect))) {
+					if (!(livingEntity instanceof Enemy) && ((instance.getEffect().value().isBeneficial() && giveNonEnemyBeneficialEffect) || (instance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL && giveNonEnemyHarmfulEffect))) {
+						tryGiveEffect(toGive, livingEntity);
+					}
+					if (instance.getEffect().value().getCategory() == MobEffectCategory.NEUTRAL) {
 						tryGiveEffect(toGive, livingEntity);
 					}
 				}

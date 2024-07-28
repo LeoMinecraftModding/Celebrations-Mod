@@ -14,6 +14,16 @@ public class CEnglishLanguageProvider extends LanguageProvider {
 	@Override
 	protected void addTranslations() {
 		add("name." + Celebrations.ID, "Celebrations");
+		add("fml.menu.mods.info.description." + Celebrations.ID, "A mod about celebrating!");
+		add(Celebrations.ID + ".configuration.celebration", "Celebrations");
+		add(Celebrations.ID + ".configuration.celebrationInterval", "Celebration Interval");
+		add(Celebrations.ID + ".configuration.celebrationDuration", "Celebration Duration");
+		add(Celebrations.ID + ".configuration.lantern", "Lanterns");
+		add(Celebrations.ID + ".configuration.lanternEffectRange", "Lantern Mob Effect Range");
+		add(Celebrations.ID + ".configuration.lanternGiveNonEnemyBeneficialEffect", "Lanterns Give Non-enemy Mobs Beneficial Effects");
+		add(Celebrations.ID + ".configuration.lanternGiveNonEnemyHarmfulEffect", "Lanterns Give Non-enemy Mobs Harmful Effects");
+		add(Celebrations.ID + ".configuration.lanternGiveEnemyBeneficialEffect", "Lanterns Give Enemies Beneficial Effects");
+		add(Celebrations.ID + ".configuration.lanternGiveEnemyHarmfulEffect", "Lanterns Give Enemies Harmful Effects");
 		add(CBlocks.CHINESE_STYLED_BAMBOO_LANTERN.get(), "Chinese Styled Bamboo Lantern");
 		add(CBlocks.CHINESE_STYLED_PAPER_LANTERN.get(), "Chinese Styled Paper Lantern");
 		add(CBlocks.CHINESE_STYLED_RED_LANTERN.get(), "Chinese Styled Red Lantern");
