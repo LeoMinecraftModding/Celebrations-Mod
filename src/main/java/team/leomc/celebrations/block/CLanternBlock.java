@@ -45,6 +45,7 @@ import team.leomc.celebrations.util.CTags;
 import java.util.List;
 
 public class CLanternBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+	public static final MapCodec<CLanternBlock> CODEC = simpleCodec(CLanternBlock::new);
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -55,7 +56,7 @@ public class CLanternBlock extends BaseEntityBlock implements SimpleWaterloggedB
 
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return null;
+		return CODEC;
 	}
 
 	@Override
