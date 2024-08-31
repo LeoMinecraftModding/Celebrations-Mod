@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -27,12 +28,12 @@ public class PartyHatLayer<T extends Mob, M extends EntityModel<T> & PartyHatPar
 	@Override
 	public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T mob, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		ItemStack stack = mob.getItemBySlot(EquipmentSlot.HEAD);
-		if (!stack.is(CItems.PARTY_HAT.get()) && !stack.isEmpty()) {
+		if (!stack.is(CItems.PARTY_HAT.get()) && !stack.isEmpty() && !(stack.getItem() instanceof ArmorItem)) {
 			return;
 		}
 		poseStack.pushPose();
 		getParentModel().translate(poseStack);
-		if (mob instanceof PartyHatWearer wearer && wearer.isWearingPartyHat() && stack.isEmpty()) {
+		if (mob instanceof PartyHatWearer wearer && wearer.isWearingPartyHat() && !stack.is(CItems.PARTY_HAT.get())) {
 			stack = PartyHatUtils.getMobPartyHatItem(mob);
 		}
 		if (stack.is(CItems.PARTY_HAT.get())) {
