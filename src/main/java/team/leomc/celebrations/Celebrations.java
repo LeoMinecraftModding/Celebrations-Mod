@@ -20,6 +20,7 @@ public class Celebrations {
 		CDataComponents.DATA_COMPONENTS.register(modBus);
 		CItems.ITEMS.register(modBus);
 		CCreativeModeTabs.TABS.register(modBus);
+		CEntities.ENTITY_TYPES.register(modBus);
 		CRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
 	}
 

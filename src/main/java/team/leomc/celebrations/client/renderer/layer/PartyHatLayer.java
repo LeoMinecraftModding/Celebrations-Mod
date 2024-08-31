@@ -26,10 +26,13 @@ public class PartyHatLayer<T extends Mob, M extends EntityModel<T> & PartyHatPar
 
 	@Override
 	public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T mob, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+		ItemStack stack = mob.getItemBySlot(EquipmentSlot.HEAD);
+		if (!stack.is(CItems.PARTY_HAT.get()) && !stack.isEmpty()) {
+			return;
+		}
 		poseStack.pushPose();
 		getParentModel().translate(poseStack);
-		ItemStack stack = mob.getItemBySlot(EquipmentSlot.HEAD);
-		if (mob instanceof PartyHatWearer wearer && wearer.isWearingPartyHat() && !stack.is(CItems.PARTY_HAT.get())) {
+		if (mob instanceof PartyHatWearer wearer && wearer.isWearingPartyHat() && stack.isEmpty()) {
 			stack = PartyHatUtils.getMobPartyHatItem(mob);
 		}
 		if (stack.is(CItems.PARTY_HAT.get())) {

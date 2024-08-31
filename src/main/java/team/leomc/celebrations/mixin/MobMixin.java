@@ -2,6 +2,7 @@ package team.leomc.celebrations.mixin;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -20,7 +21,8 @@ public abstract class MobMixin implements PartyHatWearer {
 	@Inject(method = "getItemBySlot", at = @At("RETURN"), cancellable = true)
 	protected void getItemBySlot(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> cir) {
 		Mob mob = ((Mob) (Object) this);
-		if (celebrations$wearingPartyHat && isWearingPartyHat() && mob.level().isClientSide) {
+		ItemStack original = cir.getReturnValue();
+		if ((original.isEmpty() || original.getItem() instanceof ArmorItem) && celebrations$wearingPartyHat && isWearingPartyHat() && mob.level().isClientSide) {
 			cir.setReturnValue(PartyHatUtils.getMobPartyHatItem(mob));
 		}
 	}

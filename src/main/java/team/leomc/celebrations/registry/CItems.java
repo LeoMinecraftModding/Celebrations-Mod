@@ -35,4 +35,6 @@ public class CItems {
 	public static final DeferredItem<Item> GOLD_POWDER = ITEMS.register("gold_powder", () -> new DyeItem(DyeColor.YELLOW, new Item.Properties()));
 
 	public static final DeferredItem<PartyHatItem> PARTY_HAT = ITEMS.register("party_hat", () -> new PartyHatItem(new Item.Properties().stacksTo(1)));
+
+	public static final DeferredItem<Item> BALLOON = ITEMS.register("balloon", () -> new Item(new Item.Properties().stacksTo(1)));
 }

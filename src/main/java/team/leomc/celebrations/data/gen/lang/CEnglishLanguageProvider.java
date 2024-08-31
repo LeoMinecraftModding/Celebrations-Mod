@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.registry.CBlocks;
+import team.leomc.celebrations.registry.CEntities;
 import team.leomc.celebrations.registry.CItems;
 
 public class CEnglishLanguageProvider extends LanguageProvider {
@@ -39,6 +40,8 @@ public class CEnglishLanguageProvider extends LanguageProvider {
 		add(CItems.RED_PAPER.get(), "Red Paper");
 		add(CItems.GOLD_POWDER.get(), "Gold Powder");
 		add(CItems.PARTY_HAT.get(), "Party Hat");
+		add(CItems.BALLOON.get(), "Balloon");
+		add(CEntities.BALLOON.get(), "Balloon");
 		add("party_hat_type." + Celebrations.ID + ".stripes", " Stripes");
 		add("party_hat_type." + Celebrations.ID + ".tilt_stripes", " Tilt Stripes");
 		add("party_hat_type." + Celebrations.ID + ".dots", " Dots");

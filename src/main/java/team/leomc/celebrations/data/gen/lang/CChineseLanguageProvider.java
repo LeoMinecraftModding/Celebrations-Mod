@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.registry.CBlocks;
+import team.leomc.celebrations.registry.CEntities;
 import team.leomc.celebrations.registry.CItems;
 
 public class CChineseLanguageProvider extends LanguageProvider {
@@ -39,6 +40,8 @@ public class CChineseLanguageProvider extends LanguageProvider {
 		add(CItems.RED_PAPER.get(), "红纸");
 		add(CItems.GOLD_POWDER.get(), "金粉");
 		add(CItems.PARTY_HAT.get(), "派对帽");
+		add(CItems.BALLOON.get(), "气球");
+		add(CEntities.BALLOON.get(), "气球");
 		add("party_hat_type." + Celebrations.ID + ".stripes", "横纹");
 		add("party_hat_type." + Celebrations.ID + ".tilt_stripes", "斜纹");
 		add("party_hat_type." + Celebrations.ID + ".dots", "点状纹");

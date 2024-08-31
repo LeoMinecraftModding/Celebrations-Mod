@@ -68,7 +68,7 @@ public class LanternItem extends BlockItem {
 			if (lantern != null) {
 				lantern = new Lantern(lantern.effects(), newGift, player.getName());
 				stack.applyComponentsAndValidate(DataComponentPatch.builder().set(CDataComponents.LANTERN.get(), lantern).build());
-				if (!player.getAbilities().instabuild) {
+				if (!player.hasInfiniteMaterials()) {
 					player.setItemInHand(oppositeHand, ItemStack.EMPTY);
 				}
 			}

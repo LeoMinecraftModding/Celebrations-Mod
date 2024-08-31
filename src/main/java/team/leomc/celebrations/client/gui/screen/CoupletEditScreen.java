@@ -10,7 +10,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.block.entity.CoupletBlockEntity;
-import team.leomc.celebrations.client.renderer.CoupletRenderer;
+import team.leomc.celebrations.client.renderer.block.CoupletRenderer;
 import team.leomc.celebrations.network.UpdateSignLikeTextPayload;
 import team.leomc.celebrations.util.SignLikeText;
 

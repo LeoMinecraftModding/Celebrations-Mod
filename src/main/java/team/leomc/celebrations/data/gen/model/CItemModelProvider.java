@@ -33,6 +33,7 @@ public class CItemModelProvider extends ItemModelProvider {
 		basicItem(CItems.RED_PAPER.get());
 		basicItem(CItems.GOLD_POWDER.get());
 		partyHat(CItems.PARTY_HAT.get());
+		balloon(CItems.BALLOON.get());
 	}
 
 	private void partyHat(Item item) {
@@ -54,6 +55,13 @@ public class CItemModelProvider extends ItemModelProvider {
 			.override().predicate(Celebrations.id("party_hat_type"), 0.1f).model(stripes).end()
 			.override().predicate(Celebrations.id("party_hat_type"), 0.2f).model(tiltStripes).end()
 			.override().predicate(Celebrations.id("party_hat_type"), 0.3f).model(dots).end();
+	}
+
+	private void balloon(Item item) {
+		this.getBuilder(name(item))
+			.parent(new ModelFile.UncheckedModelFile("item/generated"))
+			.texture("layer0", itemTexture(item).withSuffix("_leash"))
+			.texture("layer1", itemTexture(item));
 	}
 
 	private void block(Item item) {

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.WanderingTrader;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,7 +25,10 @@ import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.ai.VillagerCelebrationAI;
 import team.leomc.celebrations.block.entity.LanternBlockEntity;
 import team.leomc.celebrations.command.CelebrationsCommand;
+import team.leomc.celebrations.entity.Balloon;
+import team.leomc.celebrations.entity.BalloonOwner;
 import team.leomc.celebrations.network.UpdateMobPartyHatPayload;
+import team.leomc.celebrations.registry.CEntities;
 import team.leomc.celebrations.registry.CItems;
 import team.leomc.celebrations.util.CelebrationUtils;
 import team.leomc.celebrations.util.LanternUtils;
@@ -173,6 +177,32 @@ public class CEvents {
 					}
 				}
 			}
+		}
+		if (event.getEntity() instanceof Player player && player instanceof BalloonOwner owner && !player.level().isClientSide) {
+			if (owner.getMainHandBalloon() != null && (owner.getMainHandBalloon().getOwner() != player || !owner.getMainHandBalloon().isMainHand() || owner.getMainHandBalloon().isRemoved())) {
+				owner.setMainHandBalloon(null);
+			}
+			if (owner.getOffhandBalloon() != null && (owner.getOffhandBalloon().getOwner() != player || owner.getOffhandBalloon().isMainHand() || owner.getOffhandBalloon().isRemoved())) {
+				owner.setOffhandBalloon(null);
+			}
+			if (player.getMainHandItem().is(CItems.BALLOON.get()) && (owner.getMainHandBalloon() == null || owner.getMainHandBalloon().isRemoved() || owner.getMainHandBalloon().getOwner() != player)) {
+				Balloon balloon = new Balloon(CEntities.BALLOON.get(), player.level());
+				balloon.setOwner(player);
+				balloon.setItem(player.getMainHandItem());
+				balloon.setMainHand(true);
+				balloon.setPos(balloon.getTargetPos(1));
+				player.level().addFreshEntity(balloon);
+				owner.setMainHandBalloon(balloon);
+			} else if (player.getOffhandItem().is(CItems.BALLOON.get()) && (owner.getOffhandBalloon() == null || owner.getOffhandBalloon().isRemoved() || owner.getOffhandBalloon().getOwner() != player)) {
+				Balloon balloon = new Balloon(CEntities.BALLOON.get(), player.level());
+				balloon.setOwner(player);
+				balloon.setItem(player.getOffhandItem());
+				balloon.setMainHand(false);
+				balloon.setPos(balloon.getTargetPos(1));
+				player.level().addFreshEntity(balloon);
+				owner.setOffhandBalloon(balloon);
+			}
+
 		}
 	}
 }

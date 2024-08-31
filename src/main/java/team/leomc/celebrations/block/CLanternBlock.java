@@ -152,12 +152,12 @@ public class CLanternBlock extends BaseEntityBlock implements SimpleWaterloggedB
 		}
 		if (stack.has(DataComponents.POTION_CONTENTS) && level.getBlockEntity(pos) instanceof LanternBlockEntity lanternBlockEntity) {
 			PotionContents potions = stack.get(DataComponents.POTION_CONTENTS);
-			if (potions != null && potions.potion().isPresent()) {
+			if (potions != null && potions.potion().isPresent() && stack.is(Items.POTION)) {
 				Potion potion = potions.potion().get().value();
-				if (potion.equals(Potions.WATER)) {
+				if (potion == Potions.WATER.value()) {
 					lanternBlockEntity.clearEffects();
 					level.setBlockAndUpdate(pos, state.setValue(LIT, false));
-					if (!player.getAbilities().instabuild) {
+					if (!player.hasInfiniteMaterials()) {
 						player.setItemInHand(hand, Items.GLASS_BOTTLE.getDefaultInstance());
 					}
 					return ItemInteractionResult.sidedSuccess(level.isClientSide);
@@ -166,7 +166,7 @@ public class CLanternBlock extends BaseEntityBlock implements SimpleWaterloggedB
 				for (MobEffectInstance instance : potions.getAllEffects()) {
 					if (!instance.getEffect().value().isInstantenous()) {
 						lanternBlockEntity.addEffect(new MobEffectInstance(instance));
-						if (!player.getAbilities().instabuild) {
+						if (!player.hasInfiniteMaterials()) {
 							player.setItemInHand(hand, Items.GLASS_BOTTLE.getDefaultInstance());
 						}
 						succeed = true;

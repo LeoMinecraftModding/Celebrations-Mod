@@ -9,6 +9,8 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -32,13 +34,19 @@ public abstract class CustomHeadLayerMixin<T extends LivingEntity, M extends Ent
 		if (livingEntity instanceof PartyHatWearer wearer && wearer.isWearingPartyHat() && livingEntity instanceof Mob mob && !stack.is(CItems.PARTY_HAT.get())) {
 			stack = PartyHatUtils.getMobPartyHatItem(mob);
 		}
+		boolean newspaper = livingEntity instanceof Villager villager && villager.getVillagerData().getProfession() == VillagerProfession.NITWIT;
 		if (stack.is(CItems.PARTY_HAT.get())) {
 			poseStack.pushPose();
 			poseStack.translate(0, 0.375f, 0);
-			PartyHatRenderer.render(PartyHatRenderer.PARTY_HAT, 1f / 0.625f, false, poseStack, buffer, FastColor.ARGB32.colorFromFloat(1, 1, 1, 1), packedLight);
-			PartyHat hat = stack.get(CDataComponents.PART_HAT.get());
-			if (hat != null) {
-				PartyHatRenderer.render(hat.getTextureLocation(), 1f / 0.625f, true, poseStack, buffer, hat.color().getTextureDiffuseColor(), packedLight);
+			if (newspaper) {
+				poseStack.translate(0, 0.02f, 0);
+				PartyHatRenderer.renderNewspaperHat(1f, poseStack, buffer, FastColor.ARGB32.colorFromFloat(1, 1, 1, 1), packedLight);
+			} else {
+				PartyHatRenderer.render(PartyHatRenderer.PARTY_HAT, 1f / 0.625f, false, poseStack, buffer, FastColor.ARGB32.colorFromFloat(1, 1, 1, 1), packedLight);
+				PartyHat hat = stack.get(CDataComponents.PART_HAT.get());
+				if (hat != null) {
+					PartyHatRenderer.render(hat.getTextureLocation(), 1f / 0.625f, true, poseStack, buffer, hat.color().getTextureDiffuseColor(), packedLight);
+				}
 			}
 			poseStack.popPose();
 		}

@@ -1,4 +1,4 @@
-package team.leomc.celebrations.client.renderer;
+package team.leomc.celebrations.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
