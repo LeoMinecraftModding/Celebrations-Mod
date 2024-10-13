@@ -26,16 +26,18 @@ import team.leomc.celebrations.registry.CItems;
 public class CClientSetupEvents {
 	@SubscribeEvent
 	private static void onClientSetup(FMLClientSetupEvent event) {
-		ItemProperties.register(CItems.PARTY_HAT.get(), Celebrations.id("party_hat_type"), (itemStack, clientLevel, livingEntity, i) -> {
-			PartyHat partyHat = itemStack.get(CDataComponents.PART_HAT.get());
-			if (partyHat != null) {
-				return switch (partyHat.type()) {
-					case STRIPES -> 0.1f;
-					case TILT_STRIPES -> 0.2f;
-					case DOTS -> 0.3f;
-				};
-			}
-			return Float.NEGATIVE_INFINITY;
+		event.enqueueWork(() -> {
+			ItemProperties.register(CItems.PARTY_HAT.get(), Celebrations.id("party_hat_type"), (itemStack, clientLevel, livingEntity, i) -> {
+				PartyHat partyHat = itemStack.get(CDataComponents.PART_HAT.get());
+				if (partyHat != null) {
+					return switch (partyHat.type()) {
+						case STRIPES -> 0.1f;
+						case TILT_STRIPES -> 0.2f;
+						case DOTS -> 0.3f;
+					};
+				}
+				return Float.NEGATIVE_INFINITY;
+			});
 		});
 	}
 
