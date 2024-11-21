@@ -25,10 +25,6 @@ public class CBlockLootSubProvider extends BlockLootSubProvider {
 		dropSelf(CBlocks.JAPANESE_STYLED_RED_LANTERN.get());
 		dropSelf(CBlocks.COUPLET.get());
 		dropSelf(CBlocks.HORIZONTAL_SCROLL.get());
-		dropSelf(CBlocks.FU_STICKER.get());
-		dropSelf(CBlocks.INVERTED_FU_STICKER.get());
-		dropSelf(CBlocks.GOLDEN_FU_STICKER.get());
-		dropSelf(CBlocks.INVERTED_GOLDEN_FU_STICKER.get());
 		dropSelf(CBlocks.FIREWORK_BUNDLE.get());
 	}
 

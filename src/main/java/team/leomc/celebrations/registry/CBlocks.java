@@ -94,9 +94,5 @@ public class CBlocks {
 
 	public static final DeferredBlock<CoupletBlock> COUPLET = BLOCKS.register("couplet", () -> new CoupletBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
 	public static final DeferredBlock<HorizontalScrollBlock> HORIZONTAL_SCROLL = BLOCKS.register("horizontal_scroll", () -> new HorizontalScrollBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
-	public static final DeferredBlock<FuStickerBlock> FU_STICKER = BLOCKS.register("fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
-	public static final DeferredBlock<FuStickerBlock> INVERTED_FU_STICKER = BLOCKS.register("inverted_fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
-	public static final DeferredBlock<FuStickerBlock> GOLDEN_FU_STICKER = BLOCKS.register("golden_fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
-	public static final DeferredBlock<FuStickerBlock> INVERTED_GOLDEN_FU_STICKER = BLOCKS.register("inverted_golden_fu_sticker", () -> new FuStickerBlock(BlockBehaviour.Properties.of().noCollission().mapColor(MapColor.COLOR_RED).sound(SoundType.AZALEA_LEAVES).instabreak()));
 	public static final DeferredBlock<FireworkBundleBlock> FIREWORK_BUNDLE = BLOCKS.register("firework_bundle", () -> new FireworkBundleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TNT).mapColor(MapColor.COLOR_BROWN)));
 }
