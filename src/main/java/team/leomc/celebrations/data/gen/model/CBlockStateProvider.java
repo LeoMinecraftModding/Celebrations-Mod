@@ -31,10 +31,6 @@ public class CBlockStateProvider extends BlockStateProvider {
 		simpleExisting(CBlocks.JAPANESE_STYLED_RED_LANTERN.get());
 		particleOnly(CBlocks.COUPLET.get());
 		particleOnly(CBlocks.HORIZONTAL_SCROLL.get());
-		particleOnly(CBlocks.FU_STICKER.get());
-		particleOnly(CBlocks.INVERTED_FU_STICKER.get());
-		particleOnly(CBlocks.GOLDEN_FU_STICKER.get());
-		particleOnly(CBlocks.INVERTED_GOLDEN_FU_STICKER.get());
 		cubeBottomTop(CBlocks.FIREWORK_BUNDLE.get());
 	}
 

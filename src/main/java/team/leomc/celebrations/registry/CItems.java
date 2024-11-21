@@ -1,16 +1,12 @@
 package team.leomc.celebrations.registry;
 
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import team.leomc.celebrations.Celebrations;
-import team.leomc.celebrations.item.CoupletItem;
-import team.leomc.celebrations.item.FireworkBundleItem;
-import team.leomc.celebrations.item.LanternItem;
-import team.leomc.celebrations.item.PartyHatItem;
+import team.leomc.celebrations.item.*;
 
 public class CItems {
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Celebrations.ID);
@@ -24,11 +20,6 @@ public class CItems {
 	public static final DeferredItem<CoupletItem> COUPLET = ITEMS.register("couplet", () -> new CoupletItem(CBlocks.COUPLET.get(), new Item.Properties()));
 	public static final DeferredItem<CoupletItem> HORIZONTAL_SCROLL = ITEMS.register("horizontal_scroll", () -> new CoupletItem(CBlocks.HORIZONTAL_SCROLL.get(), new Item.Properties()));
 
-	public static final DeferredItem<BlockItem> FU_STICKER = ITEMS.register("fu_sticker", () -> new BlockItem(CBlocks.FU_STICKER.get(), new Item.Properties()));
-	public static final DeferredItem<BlockItem> INVERTED_FU_STICKER = ITEMS.register("inverted_fu_sticker", () -> new BlockItem(CBlocks.INVERTED_FU_STICKER.get(), new Item.Properties()));
-	public static final DeferredItem<BlockItem> GOLDEN_FU_STICKER = ITEMS.register("golden_fu_sticker", () -> new BlockItem(CBlocks.GOLDEN_FU_STICKER.get(), new Item.Properties()));
-	public static final DeferredItem<BlockItem> INVERTED_GOLDEN_FU_STICKER = ITEMS.register("inverted_golden_fu_sticker", () -> new BlockItem(CBlocks.INVERTED_GOLDEN_FU_STICKER.get(), new Item.Properties()));
-
 	public static final DeferredItem<FireworkBundleItem> FIREWORK_BUNDLE = ITEMS.register("firework_bundle", () -> new FireworkBundleItem(CBlocks.FIREWORK_BUNDLE.get(), new Item.Properties()));
 
 	public static final DeferredItem<Item> RED_PAPER = ITEMS.register("red_paper", () -> new Item(new Item.Properties()));
@@ -37,4 +28,9 @@ public class CItems {
 	public static final DeferredItem<PartyHatItem> PARTY_HAT = ITEMS.register("party_hat", () -> new PartyHatItem(new Item.Properties().stacksTo(1)));
 
 	public static final DeferredItem<Item> BALLOON = ITEMS.register("balloon", () -> new Item(new Item.Properties().stacksTo(1)));
+
+	public static final DeferredItem<FuStickerItem> FU_STICKER = ITEMS.register("fu_sticker", () -> new FuStickerItem(new Item.Properties()));
+	public static final DeferredItem<FuStickerItem> INVERTED_FU_STICKER = ITEMS.register("inverted_fu_sticker", () -> new FuStickerItem(new Item.Properties()));
+	public static final DeferredItem<FuStickerItem> GOLDEN_FU_STICKER = ITEMS.register("golden_fu_sticker", () -> new FuStickerItem(new Item.Properties()));
+	public static final DeferredItem<FuStickerItem> INVERTED_GOLDEN_FU_STICKER = ITEMS.register("inverted_golden_fu_sticker", () -> new FuStickerItem(new Item.Properties()));
 }

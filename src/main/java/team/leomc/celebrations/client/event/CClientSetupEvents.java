@@ -11,9 +11,9 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import team.leomc.celebrations.Celebrations;
 import team.leomc.celebrations.client.model.entity.BalloonModel;
 import team.leomc.celebrations.client.renderer.block.CoupletRenderer;
-import team.leomc.celebrations.client.renderer.block.FuStickerRenderer;
 import team.leomc.celebrations.client.renderer.block.HorizontalScrollRenderer;
 import team.leomc.celebrations.client.renderer.entity.BalloonRenderer;
+import team.leomc.celebrations.client.renderer.entity.FuStickerRenderer;
 import team.leomc.celebrations.item.component.BalloonData;
 import team.leomc.celebrations.item.component.PartyHat;
 import team.leomc.celebrations.registry.CBlockEntities;
@@ -42,9 +42,9 @@ public class CClientSetupEvents {
 	@SubscribeEvent
 	private static void onRegisterEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(CEntities.BALLOON.get(), BalloonRenderer::new);
+		event.registerEntityRenderer(CEntities.FU_STICKER.get(), FuStickerRenderer::new);
 		event.registerBlockEntityRenderer(CBlockEntities.COUPLET.get(), CoupletRenderer::new);
 		event.registerBlockEntityRenderer(CBlockEntities.HORIZONTAL_SCROLL.get(), HorizontalScrollRenderer::new);
-		event.registerBlockEntityRenderer(CBlockEntities.FU_STICKER.get(), FuStickerRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -64,6 +64,5 @@ public class CClientSetupEvents {
 		event.registerLayerDefinition(BalloonModel.LAYER_LOCATION, BalloonModel::createBodyLayer);
 		event.registerLayerDefinition(CoupletRenderer.LAYER_LOCATION, CoupletRenderer::createCoupletLayer);
 		event.registerLayerDefinition(HorizontalScrollRenderer.LAYER_LOCATION, HorizontalScrollRenderer::createScrollLayer);
-		event.registerLayerDefinition(FuStickerRenderer.LAYER_LOCATION, FuStickerRenderer::createStickerLayer);
 	}
 }
