@@ -54,6 +54,15 @@ public class FuStickerRenderer extends EntityRenderer<FuSticker> {
 				float openRotation = (hingeSide == DoorHingeSide.LEFT) ? 90.0F : -90.0F;
 				poseStack.mulPose(Axis.YP.rotationDegrees(openRotation));
 			}
+		} else {
+			Direction facing = entity.getDirection();
+
+			switch (facing) {
+				case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+				case WEST -> poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+				case NORTH -> poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+				default -> {}
+			}
 		}
 
 		VertexConsumer buffer = bufferSource.getBuffer(RenderType.entityCutout(getTextureLocation(entity)));
